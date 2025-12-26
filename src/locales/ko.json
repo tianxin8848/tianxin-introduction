@@ -171,14 +171,9 @@
   },
   "tools": {
     "title": "날씨 도구",
-    "description": "여러 도시의 현재 날씨와 3일간의 날씨 예보를 확인하세요",
-    "loading": "날씨 데이터를 불러오는 중...",
-    "fetchError": "날씨 데이터를 가져오는데 실패했습니다. 나중에 다시 시도해주세요",
-    "loadError": "로드 실패",
-    "today": "오늘",
-    "forecast": "3일 예보",
-    "apiLang": "ko",
-    "dateLocale": "ko-KR",
+    "description": "도시 카드를 클릭하여 Google 날씨 검색 결과를 확인하세요",
+    "clickToSearch": "클릭하여 날씨 보기",
+    "viewWeather": "날씨 보기",
     "cities": [
       {
         "name": "심천",
@@ -204,7 +199,38 @@
         "name": "일본",
         "query": "Tokyo"
       }
-    ]
+    ],
+    "weather": {
+      "clear": "맑음",
+      "mostlyClear": "대체로 맑음",
+      "partlyCloudy": "부분적으로 흐림",
+      "overcast": "흐림",
+      "foggy": "안개",
+      "depositingRime": "서리",
+      "lightDrizzle": "약한 이슬비",
+      "moderateDrizzle": "보통 이슬비",
+      "denseDrizzle": "강한 이슬비",
+      "lightFreezingDrizzle": "약한 동결 이슬비",
+      "denseFreezingDrizzle": "강한 동결 이슬비",
+      "slightRain": "약한 비",
+      "moderateRain": "보통 비",
+      "heavyRain": "강한 비",
+      "lightFreezingRain": "약한 동결 비",
+      "heavyFreezingRain": "강한 동결 비",
+      "slightSnow": "약한 눈",
+      "moderateSnow": "보통 눈",
+      "heavySnow": "강한 눈",
+      "snowGrains": "눈알",
+      "slightRainShowers": "약한 소나기",
+      "moderateRainShowers": "보통 소나기",
+      "violentRainShowers": "강한 소나기",
+      "slightSnowShowers": "약한 소낙눈",
+      "heavySnowShowers": "강한 소낙눈",
+      "thunderstorm": "뇌우",
+      "thunderstormHail": "우박을 동반한 뇌우",
+      "thunderstormHeavyHail": "강한 우박을 동반한 뇌우",
+      "unknown": "알 수 없음"
+    }
   }
 }
 

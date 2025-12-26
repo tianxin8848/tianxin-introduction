@@ -171,14 +171,9 @@
   },
   "tools": {
     "title": "天气工具",
-    "description": "查看多个城市的当前天气和未来3天天气预报",
-    "loading": "正在加载天气数据...",
-    "fetchError": "获取天气数据失败，请稍后重试",
-    "loadError": "加载失败",
-    "today": "今天",
-    "forecast": "未来3天预报",
-    "apiLang": "zh",
-    "dateLocale": "zh-CN",
+    "description": "点击城市卡片查看Google天气搜索结果",
+    "clickToSearch": "点击查看天气",
+    "viewWeather": "查看天气",
     "cities": [
       {
         "name": "深圳",
@@ -204,7 +199,38 @@
         "name": "日本",
         "query": "Tokyo"
       }
-    ]
+    ],
+    "weather": {
+      "clear": "晴朗",
+      "mostlyClear": "大部分晴朗",
+      "partlyCloudy": "部分多云",
+      "overcast": "阴天",
+      "foggy": "有雾",
+      "depositingRime": "有霜",
+      "lightDrizzle": "小雨",
+      "moderateDrizzle": "中雨",
+      "denseDrizzle": "大雨",
+      "lightFreezingDrizzle": "小冻雨",
+      "denseFreezingDrizzle": "大冻雨",
+      "slightRain": "小雨",
+      "moderateRain": "中雨",
+      "heavyRain": "大雨",
+      "lightFreezingRain": "小冻雨",
+      "heavyFreezingRain": "大冻雨",
+      "slightSnow": "小雪",
+      "moderateSnow": "中雪",
+      "heavySnow": "大雪",
+      "snowGrains": "雪粒",
+      "slightRainShowers": "小阵雨",
+      "moderateRainShowers": "中阵雨",
+      "violentRainShowers": "强阵雨",
+      "slightSnowShowers": "小阵雪",
+      "heavySnowShowers": "大阵雪",
+      "thunderstorm": "雷暴",
+      "thunderstormHail": "雷暴冰雹",
+      "thunderstormHeavyHail": "强雷暴冰雹",
+      "unknown": "未知"
+    }
   }
 }
 

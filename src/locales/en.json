@@ -171,14 +171,9 @@
   },
   "tools": {
     "title": "Weather Tools",
-    "description": "View current weather and 3-day forecast for multiple cities",
-    "loading": "Loading weather data...",
-    "fetchError": "Failed to fetch weather data, please try again later",
-    "loadError": "Failed to load",
-    "today": "Today",
-    "forecast": "3-Day Forecast",
-    "apiLang": "en",
-    "dateLocale": "en-US",
+    "description": "Click on city cards to view Google weather search results",
+    "clickToSearch": "Click to view weather",
+    "viewWeather": "View Weather",
     "cities": [
       {
         "name": "Shenzhen",
@@ -204,7 +199,38 @@
         "name": "Japan",
         "query": "Tokyo"
       }
-    ]
+    ],
+    "weather": {
+      "clear": "Clear",
+      "mostlyClear": "Mostly Clear",
+      "partlyCloudy": "Partly Cloudy",
+      "overcast": "Overcast",
+      "foggy": "Foggy",
+      "depositingRime": "Depositing Rime",
+      "lightDrizzle": "Light Drizzle",
+      "moderateDrizzle": "Moderate Drizzle",
+      "denseDrizzle": "Dense Drizzle",
+      "lightFreezingDrizzle": "Light Freezing Drizzle",
+      "denseFreezingDrizzle": "Dense Freezing Drizzle",
+      "slightRain": "Slight Rain",
+      "moderateRain": "Moderate Rain",
+      "heavyRain": "Heavy Rain",
+      "lightFreezingRain": "Light Freezing Rain",
+      "heavyFreezingRain": "Heavy Freezing Rain",
+      "slightSnow": "Slight Snow",
+      "moderateSnow": "Moderate Snow",
+      "heavySnow": "Heavy Snow",
+      "snowGrains": "Snow Grains",
+      "slightRainShowers": "Slight Rain Showers",
+      "moderateRainShowers": "Moderate Rain Showers",
+      "violentRainShowers": "Violent Rain Showers",
+      "slightSnowShowers": "Slight Snow Showers",
+      "heavySnowShowers": "Heavy Snow Showers",
+      "thunderstorm": "Thunderstorm",
+      "thunderstormHail": "Thunderstorm with Hail",
+      "thunderstormHeavyHail": "Thunderstorm with Heavy Hail",
+      "unknown": "Unknown"
+    }
   }
 }
 

@@ -171,14 +171,9 @@
   },
   "tools": {
     "title": "天気ツール",
-    "description": "複数の都市の現在の天気と3日間の天気予報を表示",
-    "loading": "天気データを読み込み中...",
-    "fetchError": "天気データの取得に失敗しました。後でもう一度お試しください",
-    "loadError": "読み込み失敗",
-    "today": "今日",
-    "forecast": "3日間の予報",
-    "apiLang": "ja",
-    "dateLocale": "ja-JP",
+    "description": "都市カードをクリックしてGoogle天気検索結果を表示",
+    "clickToSearch": "クリックして天気を表示",
+    "viewWeather": "天気を表示",
     "cities": [
       {
         "name": "深圳",
@@ -204,7 +199,38 @@
         "name": "日本",
         "query": "Tokyo"
       }
-    ]
+    ],
+    "weather": {
+      "clear": "快晴",
+      "mostlyClear": "ほぼ快晴",
+      "partlyCloudy": "部分的に曇り",
+      "overcast": "曇り",
+      "foggy": "霧",
+      "depositingRime": "霜",
+      "lightDrizzle": "弱い霧雨",
+      "moderateDrizzle": "中程度の霧雨",
+      "denseDrizzle": "強い霧雨",
+      "lightFreezingDrizzle": "弱い凍結霧雨",
+      "denseFreezingDrizzle": "強い凍結霧雨",
+      "slightRain": "弱い雨",
+      "moderateRain": "中程度の雨",
+      "heavyRain": "強い雨",
+      "lightFreezingRain": "弱い凍雨",
+      "heavyFreezingRain": "強い凍雨",
+      "slightSnow": "弱い雪",
+      "moderateSnow": "中程度の雪",
+      "heavySnow": "強い雪",
+      "snowGrains": "雪粒",
+      "slightRainShowers": "弱いにわか雨",
+      "moderateRainShowers": "中程度のにわか雨",
+      "violentRainShowers": "強いにわか雨",
+      "slightSnowShowers": "弱いにわか雪",
+      "heavySnowShowers": "強いにわか雪",
+      "thunderstorm": "雷雨",
+      "thunderstormHail": "雹を伴う雷雨",
+      "thunderstormHeavyHail": "強い雹を伴う雷雨",
+      "unknown": "不明"
+    }
   }
 }
 
