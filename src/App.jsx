@@ -46,7 +46,7 @@ function Navigation() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          田欣
+          Xin Tian
         </Link>
         <ul className="nav-menu">
           {navRoutes.map((route) => (

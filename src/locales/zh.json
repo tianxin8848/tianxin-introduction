@@ -9,7 +9,7 @@
     "tools": "工具"
   },
   "home": {
-    "title": "你好，我是田欣",
+    "title": "你好，我是Xin Tian",
     "subtitle": "欢迎来到我的个人介绍网站",
     "description": "这里记录了我的学习历程、技能专长和工作经历",
     "learnMore": "了解更多",
@@ -35,7 +35,7 @@
     "title": "关于我",
     "profile": {
       "title": "个人简介",
-      "content": "你好，我是田欣。我热爱编程和技术创新，致力于不断提升自己的技能和知识水平。我相信持续学习和实践是成长的关键。"
+      "content": "你好，我是Xin Tian。我热爱编程和技术创新，致力于不断提升自己的技能和知识水平。我相信持续学习和实践是成长的关键。"
     },
     "interests": {
       "title": "兴趣爱好",
@@ -122,7 +122,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 田欣的自我介绍. All rights reserved."
+    "copyright": "© 2024 自我介绍. All rights reserved."
   },
   "language": {
     "switch": "切换语言"
