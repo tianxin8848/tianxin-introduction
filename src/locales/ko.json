@@ -5,7 +5,8 @@
     "skills": "기술",
     "experience": "경력",
     "contact": "연락처",
-    "interview": "면접 팁"
+    "interview": "면접 팁",
+    "tools": "도구"
   },
   "home": {
     "title": "안녕하세요, 저는 전흔입니다",
@@ -167,6 +168,43 @@
         "자신감과 긍정적인 태도를 유지하고 학습 능력과 문제 해결 능력을 보여주세요"
       ]
     }
+  },
+  "tools": {
+    "title": "날씨 도구",
+    "description": "여러 도시의 현재 날씨와 3일간의 날씨 예보를 확인하세요",
+    "loading": "날씨 데이터를 불러오는 중...",
+    "fetchError": "날씨 데이터를 가져오는데 실패했습니다. 나중에 다시 시도해주세요",
+    "loadError": "로드 실패",
+    "today": "오늘",
+    "forecast": "3일 예보",
+    "apiLang": "ko",
+    "dateLocale": "ko-KR",
+    "cities": [
+      {
+        "name": "심천",
+        "query": "Shenzhen"
+      },
+      {
+        "name": "상하이",
+        "query": "Shanghai"
+      },
+      {
+        "name": "후난",
+        "query": "Changsha"
+      },
+      {
+        "name": "영순",
+        "query": "Yongshun"
+      },
+      {
+        "name": "한국",
+        "query": "Seoul"
+      },
+      {
+        "name": "일본",
+        "query": "Tokyo"
+      }
+    ]
   }
 }
 

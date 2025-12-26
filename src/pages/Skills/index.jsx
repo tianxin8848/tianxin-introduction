@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import './Skills.css'
+import './index.css'
 
 function Skills() {
   const { t } = useTranslation()

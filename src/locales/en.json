@@ -5,7 +5,8 @@
     "skills": "Skills",
     "experience": "Experience",
     "contact": "Contact",
-    "interview": "Interview Tips"
+    "interview": "Interview Tips",
+    "tools": "Tools"
   },
   "home": {
     "title": "Hello, I'm Tianxin",
@@ -167,6 +168,43 @@
         "Maintain confidence and a positive attitude, demonstrate learning ability and problem-solving skills"
       ]
     }
+  },
+  "tools": {
+    "title": "Weather Tools",
+    "description": "View current weather and 3-day forecast for multiple cities",
+    "loading": "Loading weather data...",
+    "fetchError": "Failed to fetch weather data, please try again later",
+    "loadError": "Failed to load",
+    "today": "Today",
+    "forecast": "3-Day Forecast",
+    "apiLang": "en",
+    "dateLocale": "en-US",
+    "cities": [
+      {
+        "name": "Shenzhen",
+        "query": "Shenzhen"
+      },
+      {
+        "name": "Shanghai",
+        "query": "Shanghai"
+      },
+      {
+        "name": "Hunan",
+        "query": "Changsha"
+      },
+      {
+        "name": "Yongshun",
+        "query": "Yongshun"
+      },
+      {
+        "name": "South Korea",
+        "query": "Seoul"
+      },
+      {
+        "name": "Japan",
+        "query": "Tokyo"
+      }
+    ]
   }
 }
 

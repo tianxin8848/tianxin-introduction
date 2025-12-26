@@ -4,6 +4,7 @@ import Skills from '../pages/Skills'
 import Experience from '../pages/Experience'
 import Contact from '../pages/Contact'
 import Interview from '../pages/Interview'
+import Tools from '../pages/Tools'
 
 // 路由配置
 export const routes = [
@@ -42,6 +43,12 @@ export const routes = [
     element: Interview,
     key: 'interview',
     navKey: 'nav.interview'
+  },
+  {
+    path: '/tools',
+    element: Tools,
+    key: 'tools',
+    navKey: 'nav.tools'
   }
 ]
 

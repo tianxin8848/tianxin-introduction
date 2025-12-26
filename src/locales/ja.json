@@ -5,7 +5,8 @@
     "skills": "スキル",
     "experience": "経験",
     "contact": "お問い合わせ",
-    "interview": "面接のコツ"
+    "interview": "面接のコツ",
+    "tools": "ツール"
   },
   "home": {
     "title": "こんにちは、私は田欣です",
@@ -167,6 +168,43 @@
         "自信と積極的な態度を保ち、学習能力と問題解決能力を示す"
       ]
     }
+  },
+  "tools": {
+    "title": "天気ツール",
+    "description": "複数の都市の現在の天気と3日間の天気予報を表示",
+    "loading": "天気データを読み込み中...",
+    "fetchError": "天気データの取得に失敗しました。後でもう一度お試しください",
+    "loadError": "読み込み失敗",
+    "today": "今日",
+    "forecast": "3日間の予報",
+    "apiLang": "ja",
+    "dateLocale": "ja-JP",
+    "cities": [
+      {
+        "name": "深圳",
+        "query": "Shenzhen"
+      },
+      {
+        "name": "上海",
+        "query": "Shanghai"
+      },
+      {
+        "name": "湖南",
+        "query": "Changsha"
+      },
+      {
+        "name": "永順",
+        "query": "Yongshun"
+      },
+      {
+        "name": "韓国",
+        "query": "Seoul"
+      },
+      {
+        "name": "日本",
+        "query": "Tokyo"
+      }
+    ]
   }
 }
 

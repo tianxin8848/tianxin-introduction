@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import './Experience.css'
+import './index.css'
 
 function Experience() {
   const { t } = useTranslation()

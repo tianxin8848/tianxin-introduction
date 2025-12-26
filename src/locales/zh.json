@@ -5,7 +5,8 @@
     "skills": "技能",
     "experience": "经历",
     "contact": "联系我",
-    "interview": "面试技巧"
+    "interview": "八股文",
+    "tools": "工具"
   },
   "home": {
     "title": "你好，我是田欣",
@@ -167,6 +168,43 @@
         "保持自信和积极的态度，展示学习能力和解决问题的能力"
       ]
     }
+  },
+  "tools": {
+    "title": "天气工具",
+    "description": "查看多个城市的当前天气和未来3天天气预报",
+    "loading": "正在加载天气数据...",
+    "fetchError": "获取天气数据失败，请稍后重试",
+    "loadError": "加载失败",
+    "today": "今天",
+    "forecast": "未来3天预报",
+    "apiLang": "zh",
+    "dateLocale": "zh-CN",
+    "cities": [
+      {
+        "name": "深圳",
+        "query": "Shenzhen"
+      },
+      {
+        "name": "上海",
+        "query": "Shanghai"
+      },
+      {
+        "name": "湖南",
+        "query": "Changsha"
+      },
+      {
+        "name": "永顺",
+        "query": "Yongshun"
+      },
+      {
+        "name": "韩国",
+        "query": "Seoul"
+      },
+      {
+        "name": "日本",
+        "query": "Tokyo"
+      }
+    ]
   }
 }
 

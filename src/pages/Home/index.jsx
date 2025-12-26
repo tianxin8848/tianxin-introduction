@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import './Home.css'
+import './index.css'
 
 function Home() {
   const { t } = useTranslation()

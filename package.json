@@ -2,7 +2,7 @@
   "name": "tianxin-introduction",
   "version": "1.0.0",
   "type": "module",
-  "description": "田欣的自我介绍",
+  "description": "Xin Tian's Personal Website",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
