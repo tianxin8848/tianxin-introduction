@@ -1,0 +1,77 @@
+.about {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-section {
+  background-color: var(--bg-color);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.about-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.about-section p {
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.interest-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.interest-list li {
+  background-color: var(--bg-light);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  border-left: 4px solid var(--primary-color);
+}
+
+.education-item {
+  margin-top: 1rem;
+}
+
+.education-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.education-item p {
+  color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .about-section {
+    padding: 1.5rem;
+  }
+}
+

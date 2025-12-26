@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Hello, I'm Tianxin",
+    "subtitle": "Welcome to my personal introduction website",
+    "description": "Here records my learning journey, skills and work experience",
+    "learnMore": "Learn More",
+    "contactMe": "Contact Me",
+    "quickNav": "Quick Navigation",
+    "aboutCard": {
+      "title": "About Me",
+      "description": "Learn about my background and interests",
+      "link": "View Details →"
+    },
+    "skillsCard": {
+      "title": "Skills",
+      "description": "View the technologies and tools I master",
+      "link": "View Details →"
+    },
+    "experienceCard": {
+      "title": "Experience",
+      "description": "Learn about my project experience and achievements",
+      "link": "View Details →"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "profile": {
+      "title": "Personal Profile",
+      "content": "Hello, I'm Tianxin. I love programming and technological innovation, and I'm committed to continuously improving my skills and knowledge. I believe that continuous learning and practice are the keys to growth."
+    },
+    "interests": {
+      "title": "Interests",
+      "items": ["Programming", "Technology Learning", "Reading", "Fitness", "Music"]
+    },
+    "education": {
+      "title": "Education",
+      "degree": "University Degree",
+      "description": "Focused on computer science and related technology fields"
+    },
+    "traits": {
+      "title": "Personal Traits",
+      "content": "I have strong learning ability and problem-solving skills, and I like to challenge myself and constantly break through. In teamwork, I can communicate effectively and actively contribute my ideas."
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "categories": {
+      "frontend": {
+        "title": "Frontend Technologies",
+        "skills": ["React", "JavaScript", "HTML/CSS", "TypeScript", "Vue.js"]
+      },
+      "backend": {
+        "title": "Backend Technologies",
+        "skills": ["Node.js", "Python", "Java", "Database"]
+      },
+      "tools": {
+        "title": "Tools & Frameworks",
+        "skills": ["Git", "Webpack", "Vite", "Docker"]
+      }
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "items": [
+      {
+        "title": "Project Development Experience",
+        "period": "2023 - Present",
+        "description": "Participated in the development of multiple frontend projects, using React to build user interfaces and optimize user experience.",
+        "achievements": [
+          "Developed multiple responsive web applications",
+          "Optimized application performance and improved loading speed",
+          "Collaborated with teams to complete large-scale projects"
+        ]
+      },
+      {
+        "title": "Learning & Practice",
+        "period": "2022 - 2023",
+        "description": "Systematically learned frontend development technology stack through online courses and practical projects.",
+        "achievements": [
+          "Completed multiple personal projects",
+          "Mastered modern frontend development tools",
+          "Learned best practices and design patterns"
+        ]
+      },
+      {
+        "title": "Technology Exploration",
+        "period": "Ongoing",
+        "description": "Continuously learning new technologies, following industry trends, and improving technical capabilities.",
+        "achievements": [
+          "Learning the latest frontend frameworks and tools",
+          "Participating in open source projects",
+          "Sharing technical insights and experiences"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Me",
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "addressValue": "Beijing, China"
+    },
+    "form": {
+      "title": "Send Message",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Thank you for your message! I will reply to you as soon as possible."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Tianxin's Introduction. All rights reserved."
+  },
+  "language": {
+    "switch": "Switch Language"
+  }
+}
+

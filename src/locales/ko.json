@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "home": "홈",
+    "about": "소개",
+    "skills": "기술",
+    "experience": "경력",
+    "contact": "연락처"
+  },
+  "home": {
+    "title": "안녕하세요, 저는 전흔입니다",
+    "subtitle": "제 개인 소개 웹사이트에 오신 것을 환영합니다",
+    "description": "여기에는 제 학습 여정, 기술 전문성 및 업무 경험이 기록되어 있습니다",
+    "learnMore": "더 알아보기",
+    "contactMe": "연락하기",
+    "quickNav": "빠른 탐색",
+    "aboutCard": {
+      "title": "소개",
+      "description": "제 배경과 관심사에 대해 알아보기",
+      "link": "자세히 보기 →"
+    },
+    "skillsCard": {
+      "title": "기술 전문성",
+      "description": "제가 숙달한 기술과 도구 보기",
+      "link": "자세히 보기 →"
+    },
+    "experienceCard": {
+      "title": "업무 경력",
+      "description": "제 프로젝트 경험과 성과에 대해 알아보기",
+      "link": "자세히 보기 →"
+    }
+  },
+  "about": {
+    "title": "소개",
+    "profile": {
+      "title": "개인 소개",
+      "content": "안녕하세요, 저는 전흔입니다. 저는 프로그래밍과 기술 혁신을 사랑하며, 지속적으로 제 기술과 지식을 향상시키는 데 전념하고 있습니다. 지속적인 학습과 실천이 성장의 열쇠라고 믿습니다."
+    },
+    "interests": {
+      "title": "관심사",
+      "items": ["프로그래밍 개발", "기술 학습", "독서", "운동 및 피트니스", "음악 감상"]
+    },
+    "education": {
+      "title": "학력",
+      "degree": "대학 학위",
+      "description": "컴퓨터 과학 및 관련 기술 분야에 집중한 학습"
+    },
+    "traits": {
+      "title": "개인 특성",
+      "content": "저는 강한 학습 능력과 문제 해결 능력을 가지고 있으며, 자신에게 도전하고 지속적으로 돌파하는 것을 좋아합니다. 팀워크에서 저는 효과적으로 소통하고 적극적으로 제 아이디어를 기여할 수 있습니다."
+    }
+  },
+  "skills": {
+    "title": "기술 전문성",
+    "categories": {
+      "frontend": {
+        "title": "프론트엔드 기술",
+        "skills": ["React", "JavaScript", "HTML/CSS", "TypeScript", "Vue.js"]
+      },
+      "backend": {
+        "title": "백엔드 기술",
+        "skills": ["Node.js", "Python", "Java", "데이터베이스"]
+      },
+      "tools": {
+        "title": "도구 및 프레임워크",
+        "skills": ["Git", "Webpack", "Vite", "Docker"]
+      }
+    }
+  },
+  "experience": {
+    "title": "업무 경력",
+    "items": [
+      {
+        "title": "프로젝트 개발 경험",
+        "period": "2023년 - 현재",
+        "description": "여러 프론트엔드 프로젝트 개발에 참여하여 React를 사용하여 사용자 인터페이스를 구축하고 사용자 경험을 최적화했습니다.",
+        "achievements": [
+          "여러 반응형 웹 애플리케이션 개발",
+          "애플리케이션 성능 최적화 및 로딩 속도 향상",
+          "팀과 협력하여 대규모 프로젝트 완료"
+        ]
+      },
+      {
+        "title": "학습 및 실천",
+        "period": "2022년 - 2023년",
+        "description": "온라인 강의 및 실습 프로젝트를 통해 프론트엔드 개발 기술 스택을 체계적으로 학습했습니다.",
+        "achievements": [
+          "여러 개인 프로젝트 완료",
+          "현대적인 프론트엔드 개발 도구 숙달",
+          "모범 사례 및 디자인 패턴 학습"
+        ]
+      },
+      {
+        "title": "기술 탐구",
+        "period": "지속 중",
+        "description": "새로운 기술을 지속적으로 학습하고 업계 동향을 추적하며 기술 역량을 향상시키고 있습니다.",
+        "achievements": [
+          "최신 프론트엔드 프레임워크 및 도구 학습",
+          "오픈 소스 프로젝트 참여",
+          "기술적 통찰과 경험 공유"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "연락하기",
+    "info": {
+      "title": "연락처 정보",
+      "email": "이메일",
+      "phone": "전화",
+      "address": "주소",
+      "addressValue": "중국, 베이징"
+    },
+    "form": {
+      "title": "메시지 보내기",
+      "name": "이름",
+      "email": "이메일",
+      "message": "메시지",
+      "submit": "메시지 보내기",
+      "success": "메시지를 주셔서 감사합니다! 가능한 한 빨리 답변드리겠습니다."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 전흔의 자기소개. All rights reserved."
+  },
+  "language": {
+    "switch": "언어 전환"
+  }
+}
+

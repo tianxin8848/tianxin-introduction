@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于我",
+    "skills": "技能",
+    "experience": "经历",
+    "contact": "联系我"
+  },
+  "home": {
+    "title": "你好，我是田欣",
+    "subtitle": "欢迎来到我的个人介绍网站",
+    "description": "这里记录了我的学习历程、技能专长和工作经历",
+    "learnMore": "了解更多",
+    "contactMe": "联系我",
+    "quickNav": "快速导航",
+    "aboutCard": {
+      "title": "关于我",
+      "description": "了解我的背景和兴趣爱好",
+      "link": "查看详情 →"
+    },
+    "skillsCard": {
+      "title": "技能专长",
+      "description": "查看我掌握的技术和工具",
+      "link": "查看详情 →"
+    },
+    "experienceCard": {
+      "title": "工作经历",
+      "description": "了解我的项目经验和成就",
+      "link": "查看详情 →"
+    }
+  },
+  "about": {
+    "title": "关于我",
+    "profile": {
+      "title": "个人简介",
+      "content": "你好，我是田欣。我热爱编程和技术创新，致力于不断提升自己的技能和知识水平。我相信持续学习和实践是成长的关键。"
+    },
+    "interests": {
+      "title": "兴趣爱好",
+      "items": ["编程开发", "技术学习", "阅读", "运动健身", "音乐欣赏"]
+    },
+    "education": {
+      "title": "教育背景",
+      "degree": "大学学历",
+      "description": "专注于计算机科学和相关技术领域的学习"
+    },
+    "traits": {
+      "title": "个人特质",
+      "content": "我具有强烈的学习能力和解决问题的能力，喜欢挑战自己，不断突破。在团队合作中，我能够有效沟通，积极贡献自己的想法。"
+    }
+  },
+  "skills": {
+    "title": "技能专长",
+    "categories": {
+      "frontend": {
+        "title": "前端技术",
+        "skills": ["React", "JavaScript", "HTML/CSS", "TypeScript", "Vue.js"]
+      },
+      "backend": {
+        "title": "后端技术",
+        "skills": ["Node.js", "Python", "Java", "数据库"]
+      },
+      "tools": {
+        "title": "工具和框架",
+        "skills": ["Git", "Webpack", "Vite", "Docker"]
+      }
+    }
+  },
+  "experience": {
+    "title": "工作经历",
+    "items": [
+      {
+        "title": "项目开发经验",
+        "period": "2023 - 至今",
+        "description": "参与多个前端项目的开发，使用 React 构建用户界面，优化用户体验。",
+        "achievements": [
+          "开发了多个响应式 Web 应用",
+          "优化了应用性能，提升了加载速度",
+          "与团队协作完成大型项目"
+        ]
+      },
+      {
+        "title": "学习与实践",
+        "period": "2022 - 2023",
+        "description": "通过在线课程和实践项目，系统学习了前端开发技术栈。",
+        "achievements": [
+          "完成了多个个人项目",
+          "掌握了现代前端开发工具",
+          "学习了最佳实践和设计模式"
+        ]
+      },
+      {
+        "title": "技术探索",
+        "period": "持续进行",
+        "description": "不断学习新技术，关注行业动态，提升技术能力。",
+        "achievements": [
+          "学习最新的前端框架和工具",
+          "参与开源项目",
+          "分享技术心得和经验"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系我",
+    "info": {
+      "title": "联系方式",
+      "email": "邮箱",
+      "phone": "电话",
+      "address": "地址",
+      "addressValue": "中国，北京"
+    },
+    "form": {
+      "title": "发送消息",
+      "name": "姓名",
+      "email": "邮箱",
+      "message": "留言",
+      "submit": "发送消息",
+      "success": "感谢您的留言！我会尽快回复您。"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 田欣的自我介绍. All rights reserved."
+  },
+  "language": {
+    "switch": "切换语言"
+  }
+}
+
