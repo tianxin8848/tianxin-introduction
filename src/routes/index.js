@@ -3,6 +3,7 @@ import About from '../pages/About'
 import Skills from '../pages/Skills'
 import Experience from '../pages/Experience'
 import Contact from '../pages/Contact'
+import Interview from '../pages/Interview'
 
 // 路由配置
 export const routes = [
@@ -35,6 +36,12 @@ export const routes = [
     element: Contact,
     key: 'contact',
     navKey: 'nav.contact'
+  },
+  {
+    path: '/interview',
+    element: Interview,
+    key: 'interview',
+    navKey: 'nav.interview'
   }
 ]
 

@@ -10,6 +10,53 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar.hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.time-navbar {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 1rem 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.time-display {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.time-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.time-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.time-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
 }
 
 .nav-container {
@@ -121,6 +168,15 @@
   
   .language-select {
     width: 100%;
+  }
+  
+  .time-display {
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+  
+  .time-value {
+    font-size: 1.2rem;
   }
 }
 

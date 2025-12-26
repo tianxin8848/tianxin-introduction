@@ -4,7 +4,8 @@
     "about": "About",
     "skills": "Skills",
     "experience": "Experience",
-    "contact": "Contact"
+    "contact": "Contact",
+    "interview": "Interview Tips"
   },
   "home": {
     "title": "Hello, I'm Tianxin",
@@ -124,6 +125,48 @@
   },
   "language": {
     "switch": "Switch Language"
+  },
+  "interview": {
+    "title": "Interview Tips",
+    "description": "Here are some excellent frontend interview resources and learning materials to help you better prepare for technical interviews.",
+    "visitLink": "Visit Link",
+    "resources": [
+      {
+        "type": "website",
+        "title": "Vue3 Interview Questions",
+        "description": "Vue3 related interview questions and knowledge summary, covering core concepts and practical experience.",
+        "url": "https://vue3js.cn/interview/"
+      },
+      {
+        "type": "website",
+        "title": "Frontend Interview Collection",
+        "description": "Comprehensive frontend interview question collection, covering HTML, CSS, JavaScript, frameworks and more.",
+        "url": "https://huruji.github.io/FE-Interview/#/"
+      },
+      {
+        "type": "video",
+        "title": "Frontend Interview Video Tutorial 1",
+        "description": "Bilibili frontend interview video tutorial explaining common interview questions and solutions.",
+        "url": "https://www.bilibili.com/video/BV1EvUHBUEfC/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      },
+      {
+        "type": "video",
+        "title": "Frontend Interview Video Tutorial 2",
+        "description": "Another quality frontend interview video tutorial to help you better prepare for technical interviews.",
+        "url": "https://www.bilibili.com/video/BV1yT411H7YK/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      }
+    ],
+    "tips": {
+      "title": "Interview Preparation Tips",
+      "items": [
+        "Research the company and position requirements in advance, prepare related technical questions",
+        "Review basic knowledge, including HTML, CSS, JavaScript core concepts",
+        "Prepare project experience introduction, clearly explain project background, tech stack and personal contributions",
+        "Practice algorithm and programming problems to improve problem-solving speed and thinking",
+        "Prepare answers to common questions such as career planning, strengths and weaknesses",
+        "Maintain confidence and a positive attitude, demonstrate learning ability and problem-solving skills"
+      ]
+    }
   }
 }
 

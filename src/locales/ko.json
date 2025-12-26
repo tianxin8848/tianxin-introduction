@@ -4,7 +4,8 @@
     "about": "소개",
     "skills": "기술",
     "experience": "경력",
-    "contact": "연락처"
+    "contact": "연락처",
+    "interview": "면접 팁"
   },
   "home": {
     "title": "안녕하세요, 저는 전흔입니다",
@@ -124,6 +125,48 @@
   },
   "language": {
     "switch": "언어 전환"
+  },
+  "interview": {
+    "title": "면접 팁",
+    "description": "기술 면접 준비에 도움이 되는 우수한 프론트엔드 면접 리소스와 학습 자료를 모았습니다.",
+    "visitLink": "링크 방문",
+    "resources": [
+      {
+        "type": "website",
+        "title": "Vue3 면접 문제",
+        "description": "Vue3 관련 면접 문제 및 지식 요약, 핵심 개념과 실무 경험을 다룹니다.",
+        "url": "https://vue3js.cn/interview/"
+      },
+      {
+        "type": "website",
+        "title": "프론트엔드 면접 문제 모음",
+        "description": "HTML, CSS, JavaScript, 프레임워크 등 다양한 분야의 포괄적인 프론트엔드 면접 문제 모음.",
+        "url": "https://huruji.github.io/FE-Interview/#/"
+      },
+      {
+        "type": "video",
+        "title": "프론트엔드 면접 동영상 튜토리얼 1",
+        "description": "Bilibili 프론트엔드 면접 관련 동영상 튜토리얼, 일반적인 면접 문제와 해결 방법 설명.",
+        "url": "https://www.bilibili.com/video/BV1EvUHBUEfC/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      },
+      {
+        "type": "video",
+        "title": "프론트엔드 면접 동영상 튜토리얼 2",
+        "description": "기술 면접 준비에 도움이 되는 또 다른 고품질 프론트엔드 면접 동영상 튜토리얼.",
+        "url": "https://www.bilibili.com/video/BV1yT411H7YK/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      }
+    ],
+    "tips": {
+      "title": "면접 준비 조언",
+      "items": [
+        "사전에 회사와 직위 요구사항을 파악하고 관련 기술 문제를 준비하세요",
+        "HTML, CSS, JavaScript 핵심 개념을 포함한 기초 지식을 복습하세요",
+        "프로젝트 경험 소개를 준비하고 프로젝트 배경, 기술 스택 및 개인 기여도를 명확히 설명할 수 있도록 하세요",
+        "알고리즘 및 프로그래밍 문제를 연습하여 문제 해결 속도와 사고력을 향상시키세요",
+        "커리어 계획, 장단점 등 일반적인 질문에 대한 답변을 준비하세요",
+        "자신감과 긍정적인 태도를 유지하고 학습 능력과 문제 해결 능력을 보여주세요"
+      ]
+    }
   }
 }
 

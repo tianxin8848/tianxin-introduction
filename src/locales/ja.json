@@ -4,7 +4,8 @@
     "about": "私について",
     "skills": "スキル",
     "experience": "経験",
-    "contact": "お問い合わせ"
+    "contact": "お問い合わせ",
+    "interview": "面接のコツ"
   },
   "home": {
     "title": "こんにちは、私は田欣です",
@@ -124,6 +125,48 @@
   },
   "language": {
     "switch": "言語を切り替え"
+  },
+  "interview": {
+    "title": "面接のコツ",
+    "description": "技術面接の準備に役立つ優れたフロントエンド面接リソースと学習資料を集めました。",
+    "visitLink": "リンクを訪問",
+    "resources": [
+      {
+        "type": "website",
+        "title": "Vue3 面接問題",
+        "description": "Vue3関連の面接問題と知識のまとめ、コアコンセプトと実践経験をカバー。",
+        "url": "https://vue3js.cn/interview/"
+      },
+      {
+        "type": "website",
+        "title": "フロントエンド面接問題集",
+        "description": "HTML、CSS、JavaScript、フレームワークなど、フロントエンド面接問題の包括的なコレクション。",
+        "url": "https://huruji.github.io/FE-Interview/#/"
+      },
+      {
+        "type": "video",
+        "title": "フロントエンド面接動画チュートリアル 1",
+        "description": "Bilibiliのフロントエンド面接関連動画チュートリアル、一般的な面接問題と解決方法を説明。",
+        "url": "https://www.bilibili.com/video/BV1EvUHBUEfC/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      },
+      {
+        "type": "video",
+        "title": "フロントエンド面接動画チュートリアル 2",
+        "description": "技術面接の準備に役立つ別の高品質なフロントエンド面接動画チュートリアル。",
+        "url": "https://www.bilibili.com/video/BV1yT411H7YK/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      }
+    ],
+    "tips": {
+      "title": "面接準備のアドバイス",
+      "items": [
+        "事前に会社と職位の要件を理解し、関連する技術問題を準備する",
+        "HTML、CSS、JavaScriptのコアコンセプトを含む基礎知識を復習する",
+        "プロジェクト経験の紹介を準備し、プロジェクトの背景、技術スタック、個人的な貢献を明確に説明できるようにする",
+        "アルゴリズムとプログラミング問題を練習し、問題解決の速度と思考を向上させる",
+        "キャリア計画、長所と短所などの一般的な質問への回答を準備する",
+        "自信と積極的な態度を保ち、学習能力と問題解決能力を示す"
+      ]
+    }
   }
 }
 

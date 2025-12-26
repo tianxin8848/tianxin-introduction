@@ -3,15 +3,135 @@
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
   padding: 6rem 20px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* 限制图片自适应，保持比例，覆盖整个区域，防止变形 */
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 0;
+  /* 确保图片能够正确显示 */
+  visibility: visible;
+  /* 确保背景图片正确加载 */
+  background-attachment: scroll;
+}
+
+.hero-background.loaded {
+  /* 图片加载完成后显示 */
+}
+
+.hero-background.active {
+  opacity: 1 !important;
+  z-index: 1 !important;
+  visibility: visible !important;
+}
+
+/* 图片轮播遮罩层 */
+.hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 多语言欢迎语 */
+.welcome-greetings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+  flex-wrap: wrap;
+}
+
+.greeting-item {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px;
+}
+
+.greeting-separator {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
+
+/* 图片指示点 */
+.image-indicators {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 3;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.indicator:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.indicator.active {
+  background-color: white;
+  width: 32px;
+  border-radius: 6px;
 }
 
 .hero-title {
@@ -157,6 +277,30 @@
   .btn {
     width: 100%;
     max-width: 300px;
+  }
+  
+  .hero {
+    min-height: 500px;
+    padding: 4rem 20px;
+  }
+  
+  .image-indicators {
+    bottom: 1rem;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .indicator.active {
+    width: 24px;
+  }
+  
+  .welcome-greetings {
+    font-size: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
   }
 }
 

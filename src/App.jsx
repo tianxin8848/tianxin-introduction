@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { routes } from './routes'
@@ -65,13 +66,108 @@ function Navigation() {
   )
 }
 
+function TimeDisplay() {
+  const [beijingTime, setBeijingTime] = useState('')
+  const [usTime, setUsTime] = useState('')
+  
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date()
+      
+      // 北京时间 (UTC+8)
+      setBeijingTime(now.toLocaleString('zh-CN', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }))
+      
+      // 美国东部时间 (UTC-5/-4)
+      setUsTime(now.toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      }))
+    }
+    
+    updateTime()
+    const interval = setInterval(updateTime, 1000)
+    
+    return () => clearInterval(interval)
+  }, [])
+  
+  return (
+    <div className="time-display">
+      <div className="time-item">
+        <span className="time-label">北京时间:</span>
+        <span className="time-value">{beijingTime}</span>
+      </div>
+      <div className="time-item">
+        <span className="time-label">美国时间:</span>
+        <span className="time-value">{usTime}</span>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const { t } = useTranslation()
+  const [showNav, setShowNav] = useState(true)
+  const mouseTimerRef = useRef(null)
+  
+  useEffect(() => {
+    const handleMouseMove = () => {
+      // 显示导航栏
+      setShowNav(true)
+      
+      // 清除之前的定时器
+      if (mouseTimerRef.current) {
+        clearTimeout(mouseTimerRef.current)
+      }
+      
+      // 设置新的定时器：3秒无鼠标活动后隐藏导航栏
+      mouseTimerRef.current = setTimeout(() => {
+        setShowNav(false)
+      }, 3000)
+    }
+    
+    // 初始设置定时器
+    mouseTimerRef.current = setTimeout(() => {
+      setShowNav(false)
+    }, 3000)
+    
+    // 添加鼠标移动事件监听
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousedown', handleMouseMove)
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mousedown', handleMouseMove)
+      if (mouseTimerRef.current) {
+        clearTimeout(mouseTimerRef.current)
+      }
+    }
+  }, [])
   
   return (
     <Router>
       <div className="App">
-        <Navigation />
+        {showNav ? (
+          <Navigation />
+        ) : (
+          <div className="time-navbar">
+            <TimeDisplay />
+          </div>
+        )}
         <main className="main-content">
           <Routes>
             {routes.map((route) => {

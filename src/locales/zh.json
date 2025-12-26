@@ -4,7 +4,8 @@
     "about": "关于我",
     "skills": "技能",
     "experience": "经历",
-    "contact": "联系我"
+    "contact": "联系我",
+    "interview": "面试技巧"
   },
   "home": {
     "title": "你好，我是田欣",
@@ -124,6 +125,48 @@
   },
   "language": {
     "switch": "切换语言"
+  },
+  "interview": {
+    "title": "面试技巧",
+    "description": "这里收集了一些优秀的前端面试资源和学习资料，帮助你更好地准备技术面试。",
+    "visitLink": "访问链接",
+    "resources": [
+      {
+        "type": "website",
+        "title": "Vue3 面试题",
+        "description": "Vue3 相关的面试题和知识点总结，涵盖核心概念和实践经验。",
+        "url": "https://vue3js.cn/interview/"
+      },
+      {
+        "type": "website",
+        "title": "前端面试题集合",
+        "description": "全面的前端面试题集合，包含 HTML、CSS、JavaScript、框架等多个方面的题目。",
+        "url": "https://huruji.github.io/FE-Interview/#/"
+      },
+      {
+        "type": "video",
+        "title": "前端面试视频教程 1",
+        "description": "B站前端面试相关视频教程，讲解常见面试题和解题思路。",
+        "url": "https://www.bilibili.com/video/BV1EvUHBUEfC/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      },
+      {
+        "type": "video",
+        "title": "前端面试视频教程 2",
+        "description": "另一个优质的前端面试视频教程，帮助你更好地准备技术面试。",
+        "url": "https://www.bilibili.com/video/BV1yT411H7YK/?spm_id_from=333.337.search-card.all.click&vd_source=8560c1dba65878c0d3bd5849b30b9c64"
+      }
+    ],
+    "tips": {
+      "title": "面试准备建议",
+      "items": [
+        "提前了解公司和职位要求，准备相关的技术问题",
+        "复习基础知识，包括 HTML、CSS、JavaScript 核心概念",
+        "准备项目经验介绍，能够清晰地说明项目背景、技术栈和个人贡献",
+        "练习算法题和编程题，提高解题速度和思路",
+        "准备一些常见问题的回答，如职业规划、优缺点等",
+        "保持自信和积极的态度，展示学习能力和解决问题的能力"
+      ]
+    }
   }
 }
 
