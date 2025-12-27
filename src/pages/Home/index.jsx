@@ -58,6 +58,44 @@ function Home() {
     return () => clearInterval(interval)
   }, [images])
   
+  // 时区时间状态
+  const [usTime, setUsTime] = useState({ date: '', weekday: '' })
+  const [cnTime, setCnTime] = useState({ date: '', weekday: '' })
+  
+  // 更新时间显示
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date()
+      
+      // 美国时间 (美国东部时间 EST/EDT)
+      const usDate = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }))
+      const usMonth = usDate.getMonth() + 1
+      const usDay = usDate.getDate()
+      const usWeekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      setUsTime({
+        date: `${usMonth}月${usDay}日`,
+        weekday: usWeekdays[usDate.getDay()]
+      })
+      
+      // 中国时间 (北京时间)
+      const cnDate = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }))
+      const cnMonth = cnDate.getMonth() + 1
+      const cnDay = cnDate.getDate()
+      setCnTime({
+        date: `${cnMonth}月${cnDay}日`,
+        weekday: usWeekdays[cnDate.getDay()]
+      })
+    }
+    
+    // 立即更新一次
+    updateTime()
+    
+    // 每分钟更新一次
+    const interval = setInterval(updateTime, 60000)
+    
+    return () => clearInterval(interval)
+  }, [])
+  
   return (
     <div className="home">
       <section className="hero">
@@ -89,6 +127,19 @@ function Home() {
           </div>
         </div>
         <div className="hero-content">
+          <div className="time-display">
+            <div className="time-item">
+              <span className="time-label">美国</span>
+              <span className="time-date">{usTime.date}</span>
+              <span className="time-weekday">{usTime.weekday}</span>
+            </div>
+            <div className="time-separator">|</div>
+            <div className="time-item">
+              <span className="time-label">中国</span>
+              <span className="time-date">{cnTime.date}</span>
+              <span className="time-weekday">{cnTime.weekday}</span>
+            </div>
+          </div>
           <div className="welcome-greetings">
             <span className="greeting-item">환영합니다</span>
             <span className="greeting-separator">|</span>
