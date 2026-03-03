@@ -4,6 +4,7 @@
 }
 
 .knowledge-hero {
+  background: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
   color: white;
   padding: 4rem 0;
   text-align: center;
@@ -67,12 +68,12 @@
 .category-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border-color: #667eea;
+  border-color: #4CAF50;
 }
 
 .category-card.active {
-  border-color: #667eea;
-  background-color: #f8f9ff;
+  border-color: #4CAF50;
+  background-color: #f1f8e9;
 }
 
 .category-icon {
@@ -109,7 +110,7 @@
 }
 
 .category-card:hover .topic-tag {
-  background: #667eea;
+  background: #4CAF50;
   color: white;
 }
 
@@ -144,7 +145,7 @@
 }
 
 .article-category {
-  background: #667eea;
+  background: #4CAF50;
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
@@ -178,14 +179,14 @@
 }
 
 .read-more {
-  color: #667eea;
+  color: #4CAF50;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .read-more:hover {
-  color: #764ba2;
+  color: #388E3C;
   text-decoration: underline;
 }
 
@@ -239,7 +240,7 @@
 
 .path-link {
   display: inline-block;
-  background: #667eea;
+  background: #4CAF50;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 50px;
@@ -249,7 +250,7 @@
 }
 
 .path-link:hover {
-  background: #764ba2;
+  background: #388E3C;
   transform: scale(1.05);
 }
 
