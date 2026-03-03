@@ -6,7 +6,8 @@
     "experience": "Experience",
     "contact": "Contact",
     "interview": "Interview Tips",
-    "tools": "Tools"
+    "tools": "Tools",
+    "knowledgeBase": "Knowledge Base"
   },
   "home": {
     "title": "Hello, I'm Tianxin",
@@ -230,6 +231,84 @@
       "thunderstormHail": "Thunderstorm with Hail",
       "thunderstormHeavyHail": "Thunderstorm with Heavy Hail",
       "unknown": "Unknown"
+    }
+  },
+  "knowledgeBase": {
+    "title": "Knowledge Base",
+    "description": "Explore knowledge and learning resources in various technical fields to help you improve your technical abilities",
+    "categories": {
+      "title": "Knowledge Categories",
+      "frontend": {
+        "title": "Frontend Development",
+        "description": "Frontend technology related knowledge, including JavaScript, React, CSS, etc.",
+        "topics": [
+          "JavaScript",
+          "React",
+          "CSS",
+          "HTML"
+        ]
+      },
+      "backend": {
+        "title": "Backend Development",
+        "description": "Backend technology related knowledge, including Node.js, Express, database, etc.",
+        "topics": [
+          "Node.js",
+          "Express",
+          "Database",
+          "API Design"
+        ]
+      },
+      "devops": {
+        "title": "DevOps",
+        "description": "Development and operations related knowledge, including Git, Docker, CI/CD, etc.",
+        "topics": [
+          "Git",
+          "Docker",
+          "CI/CD",
+          "Cloud Services"
+        ]
+      },
+      "ai": {
+        "title": "Artificial Intelligence",
+        "description": "Artificial intelligence related knowledge, including machine learning, neural networks, etc.",
+        "topics": [
+          "Machine Learning",
+          "Neural Networks",
+          "Natural Language Processing",
+          "Computer Vision"
+        ]
+      }
+    },
+    "featuredArticles": {
+      "title": "Featured Articles"
+    },
+    "articles": {
+      "reactBasics": {
+        "title": "React Basics",
+        "description": "Learn the core concepts and basic usage of React, including components, state management, etc."
+      },
+      "nodejsSetup": {
+        "title": "Node.js Environment Setup",
+        "description": "Detailed introduction on how to set up a Node.js development environment, including the use of npm, yarn and other tools."
+      },
+      "gitBestPractices": {
+        "title": "Git Best Practices",
+        "description": "Learn the best ways to use Git, including branch management, commit specifications, etc."
+      },
+      "readMore": "Read More"
+    },
+    "learningPaths": {
+      "title": "Learning Paths",
+      "frontend": {
+        "title": "Frontend Development Path",
+        "description": "From basic to advanced frontend development learning path to help you become a frontend expert."
+      },
+      "fullStack": {
+        "title": "Full Stack Development Path",
+        "description": "A full stack development learning path covering both frontend and backend to comprehensively improve technical capabilities.",
+        "start": "Start Learning"
+      },
+      "start": "Start Learning"
     }
   }
 }

@@ -6,7 +6,8 @@
     "experience": "经历",
     "contact": "联系我",
     "interview": "八股文",
-    "tools": "工具"
+    "tools": "工具",
+    "knowledgeBase": "知识库"
   },
   "home": {
     "title": "你好，我是Xin Tian",
@@ -230,6 +231,84 @@
       "thunderstormHail": "雷暴冰雹",
       "thunderstormHeavyHail": "强雷暴冰雹",
       "unknown": "未知"
+    }
+  },
+  "knowledgeBase": {
+    "title": "知识库教学",
+    "description": "探索各种技术领域的知识和学习资源，帮助你提升技术能力",
+    "categories": {
+      "title": "知识分类",
+      "frontend": {
+        "title": "前端开发",
+        "description": "前端技术相关知识，包括JavaScript、React、CSS等",
+        "topics": [
+          "JavaScript",
+          "React",
+          "CSS",
+          "HTML"
+        ]
+      },
+      "backend": {
+        "title": "后端开发",
+        "description": "后端技术相关知识，包括Node.js、Express、数据库等",
+        "topics": [
+          "Node.js",
+          "Express",
+          "数据库",
+          "API设计"
+        ]
+      },
+      "devops": {
+        "title": "开发运维",
+        "description": "开发运维相关知识，包括Git、Docker、CI/CD等",
+        "topics": [
+          "Git",
+          "Docker",
+          "CI/CD",
+          "云服务"
+        ]
+      },
+      "ai": {
+        "title": "人工智能",
+        "description": "人工智能相关知识，包括机器学习、神经网络等",
+        "topics": [
+          "机器学习",
+          "神经网络",
+          "自然语言处理",
+          "计算机视觉"
+        ]
+      }
+    },
+    "featuredArticles": {
+      "title": "精选文章"
+    },
+    "articles": {
+      "reactBasics": {
+        "title": "React基础入门",
+        "description": "学习React的核心概念和基本用法，包括组件、状态管理等"
+      },
+      "nodejsSetup": {
+        "title": "Node.js环境搭建",
+        "description": "详细介绍如何搭建Node.js开发环境，包括npm、yarn等工具的使用"
+      },
+      "gitBestPractices": {
+        "title": "Git最佳实践",
+        "description": "学习Git的最佳使用方法，包括分支管理、提交规范等"
+      },
+      "readMore": "阅读更多"
+    },
+    "learningPaths": {
+      "title": "学习路径",
+      "frontend": {
+        "title": "前端开发路径",
+        "description": "从基础到高级的前端开发学习路径，帮助你成为前端专家"
+      },
+      "fullStack": {
+        "title": "全栈开发路径",
+        "description": "涵盖前后端的全栈开发学习路径，全面提升技术能力",
+        "start": "开始学习"
+      },
+      "start": "开始学习"
     }
   }
 }
