@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { cantoneseWords } from './data'
-import { Mode } from './types'
+import type { Mode } from './types'
 import { validateCantoneseJyutping } from './api'
 
 function App() {
@@ -48,14 +48,9 @@ function App() {
     }
   }
 
-  const toggleMode = () => {
-    setMode(prev => prev === 'reference' ? 'advanced' : 'reference')
-    setCurrentIndex(0)
-    setScore(0)
-    setTotal(0)
-  }
-
   const accuracy = total > 0 ? Math.round((score / total) * 100) : 0
+  const totalWords = cantoneseWords.length
+  const progressPercent = Math.round(((currentIndex + 1) / totalWords) * 100)
 
   return (
     <div className="app">
@@ -78,6 +73,20 @@ function App() {
       </header>
 
       <main className="main">
+        <div className="progress-card">
+          <div className="progress-header">
+            <span>練習進度</span>
+            <span>{currentIndex + 1} / {totalWords}</span>
+          </div>
+          <div className="progress-track">
+            <div
+              className="progress-fill"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+          <div className="progress-percent">{progressPercent}%</div>
+        </div>
+
         <div className="word-container">
           <div className="character">{currentWord.character}</div>
           {mode === 'reference' && (

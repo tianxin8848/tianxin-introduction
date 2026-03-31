@@ -1,4 +1,4 @@
-import { CantoneseWord } from './types';
+import type { CantoneseWord } from './types';
 
 export const cantoneseWords: CantoneseWord[] = [
   { character: '巴', jyutping: 'baa1', meaning: 'bus' },
