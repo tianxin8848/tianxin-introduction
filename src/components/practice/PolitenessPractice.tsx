@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { PolitenessPhrase } from '../../types'
 
 interface PolitenessPracticeProps {
@@ -16,6 +17,12 @@ function PolitenessPractice({
   onSubmit
 }: PolitenessPracticeProps) {
   if (!currentPhrase) return null
+
+  useEffect(() => {
+    if (isCorrect) {
+      onInputChange('')
+    }
+  }, [isCorrect, onInputChange])
 
   return (
     <section className="politeness-practice">

@@ -1,30 +1,50 @@
 import type { PolitenessPhrase } from '../types'
 
 export const politenessPhrases: PolitenessPhrase[] = [
-  // 问候语
+  // 感谢语
   {
-    character: '你好',
-    jyutping: 'nei5 hou2',
-    meaning: 'Hello',
-    category: 'greeting'
+    character: '多謝晒',
+    jyutping: 'do1 ze6 saai3',
+    meaning: 'Thank you very much',
+    category: 'thanks'
   },
   {
-    character: '早晨',
-    jyutping: 'zou2 san4',
-    meaning: 'Good morning',
-    category: 'greeting'
+    character: '唔使客氣',
+    jyutping: 'm4 sai2 haak3 hei3',
+    meaning: 'You\'re welcome',
+    category: 'thanks'
   },
   {
-    character: '午安',
-    jyutping: 'ng5 on1',
-    meaning: 'Good afternoon',
-    category: 'greeting'
+    character: '唔該晒',
+    jyutping: 'm4 goi1 saai3',
+    meaning: 'Thank you very much (for service)',
+    category: 'thanks'
   },
   {
-    character: '晚安',
-    jyutping: 'maan5 on1',
-    meaning: 'Good night',
-    category: 'greeting'
+    character: '唔使唔該',
+    jyutping: 'm4 sai2 m4 goi1',
+    meaning: 'Don\'t mention it',
+    category: 'thanks'
+  },
+  {
+    character: '多謝',
+    jyutping: 'do1 ze6',
+    meaning: 'Thank you',
+    category: 'thanks'
+  },
+  
+  // 道歉语
+  {
+    character: '唔好意思',
+    jyutping: 'm4 hou2 ji3si3',
+    meaning: 'Excuse me / I\'m sorry',
+    category: 'apology'
+  },
+  {
+    character: '對唔住',
+    jyutping: 'deoi3 m4 zyu6',
+    meaning: 'Sorry',
+    category: 'apology'
   },
   
   // 感谢语
@@ -34,90 +54,44 @@ export const politenessPhrases: PolitenessPhrase[] = [
     meaning: 'Thank you (for service)',
     category: 'thanks'
   },
-  {
-    character: '多謝',
-    jyutping: 'do1 ze6',
-    meaning: 'Thank you (for gift)',
-    category: 'thanks'
-  },
-  {
-    character: '多謝晒',
-    jyutping: 'do1 ze6 saai3',
-    meaning: 'Thank you very much',
-    category: 'thanks'
-  },
-  
-  // 道歉语
-  {
-    character: '對唔住',
-    jyutping: 'deoi3 m4 zyu6',
-    meaning: 'Sorry',
-    category: 'apology'
-  },
-  {
-    character: '唔好意思',
-    jyutping: 'm4 hou2 ji3 si1',
-    meaning: 'Excuse me / I\'m sorry',
-    category: 'apology'
-  },
   
   // 请求语
   {
-    character: '請問',
-    jyutping: 'cing2 man6',
-    meaning: 'May I ask',
+    character: '請你食糖',
+    jyutping: 'cing2 nei5 sik6 tong2',
+    meaning: 'Please have some candy',
     category: 'request'
   },
   {
-    character: '可唔可以',
-    jyutping: 'ho2 m4 ho2 ji5',
-    meaning: 'Can I / May I',
+    character: '我幫你吖',
+    jyutping: 'ngo5 bong1 nei5 aa1',
+    meaning: 'I\'ll help you',
     category: 'request'
   },
   {
-    character: '麻煩你',
-    jyutping: 'maa4 faan4 nei5',
-    meaning: 'Could you please',
+    character: '唔該借借',
+    jyutping: 'm4 goi1 ze3 ze3',
+    meaning: 'Excuse me (to pass by)',
     category: 'request'
   },
   
-  // 告别语
+  // 其他
   {
-    character: '拜拜',
-    jyutping: 'baai1 baai3',
-    meaning: 'Bye bye',
-    category: 'farewell'
+    character: '你跌咗嘢',
+    jyutping: 'nei5 dit3 zo2 je5',
+    meaning: 'You dropped something',
+    category: 'other'
   },
   {
-    character: '再見',
-    jyutping: 'zoi3 gin3',
-    meaning: 'Goodbye',
-    category: 'farewell'
+    character: '你踩到我',
+    jyutping: 'nei5 caai2 dou3 ngo5',
+    meaning: 'You stepped on me',
+    category: 'other'
   },
   {
-    character: '聽日見',
-    jyutping: 'ting1 jat6 gin3',
-    meaning: 'See you tomorrow',
-    category: 'farewell'
-  },
-  
-  // 祝福语
-  {
-    character: '恭喜',
-    jyutping: 'gung1 hei2',
-    meaning: 'Congratulations',
-    category: 'blessing'
-  },
-  {
-    character: '身體健康',
-    jyutping: 'san1 tai2 gin6 hong1',
-    meaning: 'Good health',
-    category: 'blessing'
-  },
-  {
-    character: '新年快樂',
-    jyutping: 'san1 nin4 faai3 lok6',
-    meaning: 'Happy New Year',
-    category: 'blessing'
+    character: '件衫好襯你',
+    jyutping: 'gin6 saam1 hou2 can3',
+    meaning: 'This shirt suits you well',
+    category: 'other'
   }
 ]
