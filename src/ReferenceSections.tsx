@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom'
+
 const referenceSections = [
   {
     title: '聲',
@@ -21,9 +23,19 @@ function ReferenceSections() {
           <div className="reference-title">{section.title}</div>
           <div className="reference-items">
             {section.items.map((item) => (
-              <span key={`${section.title}-${item}`} className="reference-item">
-                {item}
-              </span>
+              section.title === '韻' ? (
+                <NavLink
+                  key={`${section.title}-${item}`}
+                  to={`/final/${item}`}
+                  className={({ isActive }) => `reference-item ${isActive ? 'active' : ''}`}
+                >
+                  {item}
+                </NavLink>
+              ) : (
+                <span key={`${section.title}-${item}`} className="reference-item">
+                  {item}
+                </span>
+              )
             ))}
           </div>
         </div>

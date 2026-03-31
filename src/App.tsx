@@ -1,42 +1,66 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import './App.css'
-import { cantoneseWords } from './data'
-import type { Mode } from './types'
-import { validateCantoneseJyutping } from './api'
+import type { CantoneseWord, Mode } from './types'
+import { fetchTrainingWordsByFinal } from './api'
 import ReferenceSections from './ReferenceSections'
 import TypingStats from './TypingStats'
 import TypingPractice from './TypingPractice'
+import { isJyutpingFinal } from './finals'
 
 function App() {
+  const { final = 'aa' } = useParams()
+  const selectedFinal = useMemo(() => (isJyutpingFinal(final) ? final : 'aa'), [final])
+
   const [mode, setMode] = useState<Mode>('reference')
+  const [trainingWords, setTrainingWords] = useState<CantoneseWord[]>([])
+  const [isLoadingWords, setIsLoadingWords] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [input, setInput] = useState('')
   const [isCorrect, setIsCorrect] = useState(false)
   const [score, setScore] = useState(0)
   const [total, setTotal] = useState(0)
 
-  const currentWord = cantoneseWords[currentIndex]
+  const currentWord = trainingWords[currentIndex]
+
+  useEffect(() => {
+    let cancelled = false
+
+    const loadWords = async () => {
+      setIsLoadingWords(true)
+      const words = await fetchTrainingWordsByFinal(selectedFinal)
+      if (cancelled) return
+      setTrainingWords(words)
+      setCurrentIndex(0)
+      setInput('')
+      setIsCorrect(false)
+      setScore(0)
+      setTotal(0)
+      setIsLoadingWords(false)
+    }
+
+    loadWords()
+
+    return () => {
+      cancelled = true
+    }
+  }, [selectedFinal])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // 本地验证
-    const isLocalCorrect = input === currentWord.jyutping
-    
-    // 调用 DeepSeek API 验证
-    const isApiCorrect = await validateCantoneseJyutping(currentWord.character, input)
-    
-    // 综合验证结果
-    const isCorrectResult = isLocalCorrect && isApiCorrect
-    
-    if (isCorrectResult) {
+    if (!currentWord) return
+
+    const normalizedInput = input.trim().toLowerCase()
+    const isMatched = normalizedInput === currentWord.jyutping.toLowerCase()
+
+    if (isMatched) {
       setIsCorrect(true)
       setScore(prev => prev + 1)
       setTotal(prev => prev + 1)
       setTimeout(() => {
         setInput('')
         setIsCorrect(false)
-        setCurrentIndex(prev => (prev + 1) % cantoneseWords.length)
+        setCurrentIndex(prev => (prev + 1) % trainingWords.length)
       }, 500)
     } else {
       setTotal(prev => prev + 1)
@@ -44,13 +68,14 @@ function App() {
   }
 
   const accuracy = total > 0 ? Math.round((score / total) * 100) : 0
-  const totalWords = cantoneseWords.length
-  const progressPercent = Math.round(((currentIndex + 1) / totalWords) * 100)
+  const totalWords = trainingWords.length
+  const progressPercent = totalWords > 0 ? Math.round(((currentIndex + 1) / totalWords) * 100) : 0
 
   return (
     <div className="app">
       <header className="header">
         <h1>粵語拼音打字練習</h1>
+        <p className="current-final">當前韻母：{selectedFinal}</p>
         <div className="mode-toggle">
           <button 
             className={`mode-btn ${mode === 'reference' ? 'active' : ''}`}
@@ -83,17 +108,21 @@ function App() {
         </div>
 
         <TypingStats accuracy={accuracy} score={score} total={total} />
-        <TypingPractice
-          currentWord={currentWord}
-          mode={mode}
-          input={input}
-          isCorrect={isCorrect}
-          onInputChange={(value) => {
-            setInput(value)
-            setIsCorrect(false)
-          }}
-          onSubmit={handleSubmit}
-        />
+        {isLoadingWords || !currentWord ? (
+          <div className="loading-state">正在生成 {selectedFinal} 韻母練習詞...</div>
+        ) : (
+          <TypingPractice
+            currentWord={currentWord}
+            mode={mode}
+            input={input}
+            isCorrect={isCorrect}
+            onInputChange={(value) => {
+              setInput(value)
+              setIsCorrect(false)
+            }}
+            onSubmit={handleSubmit}
+          />
+        )}
 
         <ReferenceSections />
       </main>
