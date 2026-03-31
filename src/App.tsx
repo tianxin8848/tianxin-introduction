@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './App.css'
 import type { CantoneseWord, Mode } from './types'
@@ -19,6 +19,7 @@ function App() {
   const [isLoadingWords, setIsLoadingWords] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [lyricIndex, setLyricIndex] = useState(0)
+  const [lyricsRookieMode, setLyricsRookieMode] = useState(true)
   const [input, setInput] = useState('')
   const [isCorrect, setIsCorrect] = useState(false)
   const [score, setScore] = useState(0)
@@ -27,6 +28,23 @@ function App() {
   const currentWord = trainingWords[currentIndex]
   const currentLyricToken = lyricTokens[lyricIndex]
   const isLyricsMode = mode === 'lyrics'
+
+  const submitLyricsInput = useCallback(() => {
+    if (!currentLyricToken || currentLyricToken.isPunctuation) return
+    const normalizedInput = input.trim().toLowerCase()
+    const isMatched = normalizedInput === currentLyricToken.jyutping.toLowerCase()
+    setTotal(prev => prev + 1)
+    if (!isMatched) return
+
+    setScore(prev => prev + 1)
+    setInput('')
+    setIsCorrect(false)
+    let nextIndex = lyricIndex + 1
+    while (nextIndex < lyricTokens.length && lyricTokens[nextIndex].isPunctuation) {
+      nextIndex += 1
+    }
+    setLyricIndex(nextIndex >= lyricTokens.length ? 0 : nextIndex)
+  }, [currentLyricToken, input, lyricIndex])
 
   useEffect(() => {
     let cancelled = false
@@ -52,23 +70,35 @@ function App() {
     }
   }, [selectedFinal])
 
+  useEffect(() => {
+    if (!isLyricsMode) return
+
+    const handleLyricsKeydown = (event: KeyboardEvent) => {
+      const key = event.key
+      if (key === 'Enter') {
+        event.preventDefault()
+        submitLyricsInput()
+        return
+      }
+      if (key === 'Backspace') {
+        event.preventDefault()
+        setInput((prev) => prev.slice(0, -1))
+        return
+      }
+      if (/^[a-zA-Z0-9]$/.test(key)) {
+        event.preventDefault()
+        setInput((prev) => `${prev}${key.toLowerCase()}`)
+      }
+    }
+
+    window.addEventListener('keydown', handleLyricsKeydown)
+    return () => window.removeEventListener('keydown', handleLyricsKeydown)
+  }, [isLyricsMode, submitLyricsInput])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (isLyricsMode) {
-      if (!currentLyricToken || currentLyricToken.isPunctuation) return
-      const normalizedInput = input.trim().toLowerCase()
-      const isMatched = normalizedInput === currentLyricToken.jyutping.toLowerCase()
-      setTotal(prev => prev + 1)
-      if (!isMatched) return
-
-      setScore(prev => prev + 1)
-      setInput('')
-      setIsCorrect(false)
-      let nextIndex = lyricIndex + 1
-      while (nextIndex < lyricTokens.length && lyricTokens[nextIndex].isPunctuation) {
-        nextIndex += 1
-      }
-      setLyricIndex(nextIndex >= lyricTokens.length ? 0 : nextIndex)
+      submitLyricsInput()
       return
     }
 
@@ -137,6 +167,22 @@ function App() {
             歌詞模式
           </button>
         </div>
+        {isLyricsMode && (
+          <div className="lyrics-mode-toggle">
+            <button
+              className={`mode-btn ${lyricsRookieMode ? 'active' : ''}`}
+              onClick={() => setLyricsRookieMode(true)}
+            >
+              菜鳥模式
+            </button>
+            <button
+              className={`mode-btn ${!lyricsRookieMode ? 'active' : ''}`}
+              onClick={() => setLyricsRookieMode(false)}
+            >
+              普通模式
+            </button>
+          </div>
+        )}
       </header>
 
       <main className="main">
@@ -160,11 +206,7 @@ function App() {
             tokens={lyricTokens}
             currentIndex={lyricIndex}
             input={input}
-            onInputChange={(value) => {
-              setInput(value)
-              setIsCorrect(false)
-            }}
-            onSubmit={handleSubmit}
+            rookieMode={lyricsRookieMode}
           />
         ) : isLoadingWords || !currentWord ? (
           <div className="loading-state">正在加载 {selectedFinal} 韻母練習詞...</div>

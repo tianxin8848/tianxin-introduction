@@ -63,6 +63,13 @@ body {
   gap: 10px;
 }
 
+.lyrics-mode-toggle {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 .mode-btn {
   padding: 10px 20px;
   border: 2px solid var(--border-color);
@@ -256,10 +263,35 @@ body {
 }
 
 .lyrics-jyutping {
-  min-height: 1.2em;
+  min-height: 2.1em;
   margin-bottom: 4px;
   color: #8f8f8f;
   font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.lyrics-hint {
+  color: #9b9b9b;
+}
+
+.lyrics-input-boxes {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.lyrics-input-box {
+  min-width: 16px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: #1f1f1f;
+  color: #fff;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
 }
 
 .lyrics-char {

@@ -4,40 +4,40 @@ interface LyricsPracticeProps {
   tokens: LyricToken[]
   currentIndex: number
   input: string
-  onInputChange: (value: string) => void
-  onSubmit: (e: React.FormEvent) => Promise<void>
+  rookieMode: boolean
 }
 
 function LyricsPractice({
   tokens,
   currentIndex,
   input,
-  onInputChange,
-  onSubmit,
+  rookieMode,
 }: LyricsPracticeProps) {
   return (
     <section className="lyrics-practice">
-      <form className="typing-input-form" onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => onInputChange(e.target.value)}
-          placeholder="輸入當前字嘅拼音後按 Enter"
-          autoFocus
-        />
-      </form>
-
       <article className="lyrics-line" aria-label="歌詞打字">
         {tokens.map((token, index) => {
           const isPast = index < currentIndex
           const isCurrent = index === currentIndex
-          const topText = token.isPunctuation ? '' : isPast ? token.jyutping : isCurrent ? input : ''
+          const topHint = token.isPunctuation ? '' : rookieMode ? token.jyutping : isPast ? token.jyutping : ''
+          const inputChars = isCurrent ? input.split('') : []
           return (
             <div
               key={`${token.character}-${index}`}
               className={`lyrics-token ${isPast ? 'done' : ''} ${isCurrent ? 'current' : ''} ${token.isPunctuation ? 'punct' : ''}`}
             >
-              <div className="lyrics-jyutping">{topText}</div>
+              <div className="lyrics-jyutping">
+                <span className="lyrics-hint">{topHint}</span>
+                {isCurrent && inputChars.length > 0 && (
+                  <span className="lyrics-input-boxes" aria-label="當前輸入">
+                    {inputChars.map((char, charIndex) => (
+                      <span key={`${char}-${charIndex}`} className="lyrics-input-box">
+                        {char}
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </div>
               <span className="lyrics-char">{token.character}</span>
             </div>
           )
