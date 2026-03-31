@@ -1,5 +1,5 @@
-import type { CantoneseWord } from './types'
-import type { JyutpingFinal } from './finals'
+import type { CantoneseWord } from '../types'
+import type { JyutpingFinal } from '../data/finals'
 
 type LocalWordEntry = {
   word?: string

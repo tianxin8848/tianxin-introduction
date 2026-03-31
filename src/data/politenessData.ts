@@ -1,4 +1,4 @@
-import type { PolitenessPhrase } from './types'
+import type { PolitenessPhrase } from '../types'
 
 export const politenessPhrases: PolitenessPhrase[] = [
   // 问候语

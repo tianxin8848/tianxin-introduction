@@ -1,4 +1,4 @@
-import type { LyricToken } from './types'
+import type { LyricToken } from '../../types'
 
 interface LyricsPracticeProps {
   tokens: LyricToken[]

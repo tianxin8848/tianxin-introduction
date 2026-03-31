@@ -1,11 +1,11 @@
-import type { PolitenessPhrase } from './types'
+import type { PolitenessPhrase } from '../../types'
 
 interface PolitenessPracticeProps {
-  currentPhrase: PolitenessPhrase
+  currentPhrase: PolitenessPhrase | undefined
   input: string
   isCorrect: boolean
   onInputChange: (value: string) => void
-  onSubmit: (e: React.FormEvent) => Promise<void>
+  onSubmit: (e: React.FormEvent) => void
 }
 
 function PolitenessPractice({
@@ -15,6 +15,8 @@ function PolitenessPractice({
   onInputChange,
   onSubmit
 }: PolitenessPracticeProps) {
+  if (!currentPhrase) return null
+
   return (
     <section className="politeness-practice">
       <form onSubmit={onSubmit} className="typing-input-form">

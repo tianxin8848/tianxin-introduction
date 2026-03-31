@@ -1,11 +1,10 @@
-import type { Dispatch, SetStateAction } from 'react'
-import type { LyricToken } from './types'
+import type { LyricToken } from '../../types'
 
 interface LyricsSegmentControlsProps {
   lyricsSegmentSize: number;
-  setLyricsSegmentSize: Dispatch<SetStateAction<number>>;
+  setLyricsSegmentSize: (size: number) => void;
   lyricsCurrentSegment: number;
-  setLyricsCurrentSegment: Dispatch<SetStateAction<number>>;
+  setLyricsCurrentSegment: (segment: number) => void;
   lyricIndex: number;
   lyricTokens: LyricToken[];
 }
@@ -43,7 +42,7 @@ function LyricsSegmentControls({
       {lyricsSegmentSize > 0 && (
         <div className="segment-nav-controls">
           <button
-            onClick={() => setLyricsCurrentSegment(prev => Math.max(0, prev - 1))}
+            onClick={() => setLyricsCurrentSegment(Math.max(0, lyricsCurrentSegment - 1))}
             disabled={lyricsCurrentSegment === 0}
           >
             上一段
@@ -54,7 +53,7 @@ function LyricsSegmentControls({
           <button
             onClick={() => {
               const totalSegments = Math.ceil(lyricTokens.length / lyricsSegmentSize)
-              setLyricsCurrentSegment(prev => Math.min(totalSegments - 1, prev + 1))
+              setLyricsCurrentSegment(Math.min(totalSegments - 1, lyricsCurrentSegment + 1))
             }}
             disabled={lyricsCurrentSegment >= Math.ceil(lyricTokens.length / lyricsSegmentSize) - 1}
           >

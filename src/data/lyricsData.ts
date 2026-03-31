@@ -1,4 +1,4 @@
-import type { LyricToken } from './types'
+import type { LyricToken } from '../types'
 
 export const lyricTokens: LyricToken[] = [
   { character: '忘', jyutping: 'mong' },

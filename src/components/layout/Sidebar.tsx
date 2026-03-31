@@ -1,7 +1,7 @@
-import type { Mode } from './types'
+import type { Mode } from '../../types'
 import AppHeader from './AppHeader'
-import ModeToggle from './ModeToggle'
-import LyricsModeToggle from './LyricsModeToggle'
+import ModeToggle from '../controls/ModeToggle'
+import LyricsModeToggle from '../controls/LyricsModeToggle'
 
 interface SidebarProps {
   sidebarCollapsed: boolean;

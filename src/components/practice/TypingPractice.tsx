@@ -1,4 +1,4 @@
-import type { CantoneseWord, Mode } from './types'
+import type { CantoneseWord, Mode } from '../../types'
 
 interface TypingPracticeProps {
   currentWord: CantoneseWord
@@ -6,7 +6,7 @@ interface TypingPracticeProps {
   input: string
   isCorrect: boolean
   onInputChange: (value: string) => void
-  onSubmit: (e: React.FormEvent) => Promise<void>
+  onSubmit: (e: React.FormEvent) => void
 }
 
 function TypingPractice({
