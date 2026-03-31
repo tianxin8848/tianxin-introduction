@@ -5,6 +5,8 @@ interface LyricsPracticeProps {
   currentIndex: number
   input: string
   rookieMode: boolean
+  segmentSize?: number
+  currentSegment?: number
 }
 
 function LyricsPractice({
@@ -12,13 +14,50 @@ function LyricsPractice({
   currentIndex,
   input,
   rookieMode,
+  segmentSize = 50,
+  currentSegment = 0,
 }: LyricsPracticeProps) {
+  // 计算当前显示的tokens段
+  const getCurrentSegmentTokens = () => {
+    if (segmentSize <= 0) return tokens
+    
+    const startIndex = currentSegment * segmentSize
+    const endIndex = Math.min(startIndex + segmentSize, tokens.length)
+    return tokens.slice(startIndex, endIndex)
+  }
+  
+  // 获取当前段落的tokens
+  const currentTokens = getCurrentSegmentTokens()
+  
+  // 计算在当前段落中的相对索引
+  const getRelativeIndex = (absoluteIndex: number) => {
+    if (segmentSize <= 0) return absoluteIndex
+    
+    const segmentStart = currentSegment * segmentSize
+    return absoluteIndex - segmentStart
+  }
+  
+  const relativeCurrentIndex = getRelativeIndex(currentIndex)
+  
+  // 计算总段数
+  const totalSegments = segmentSize > 0 ? Math.ceil(tokens.length / segmentSize) : 1
+  
   return (
     <section className="lyrics-practice">
+      {/* 分段导航（如果有多段） */}
+      {totalSegments > 1 && (
+        <div className="lyrics-segment-nav">
+          <span className="lyrics-segment-info">
+            段落 {currentSegment + 1} / {totalSegments}
+          </span>
+        </div>
+      )}
+      
       <article className="lyrics-line" aria-label="歌詞打字">
-        {tokens.map((token, index) => {
-          const isPast = index < currentIndex
-          const isCurrent = index === currentIndex
+        {currentTokens.map((token, segmentIndex) => {
+          const absoluteIndex = currentSegment * segmentSize + segmentIndex
+          const isPast = absoluteIndex < currentIndex
+          const isCurrent = absoluteIndex === currentIndex
           const target = token.isPunctuation ? '' : token.jyutping
           const typed = isCurrent ? input : ''
 
@@ -32,7 +71,7 @@ function LyricsPractice({
             const parts: React.ReactNode[] = []
             for (let i = 0; i < prefixLen; i++) {
               parts.push(
-                <span key={`t-${index}-${i}`} className="lyrics-input-chip">
+                <span key={`t-${absoluteIndex}-${i}`} className="lyrics-input-chip">
                   {typed[i]}
                 </span>,
               )
@@ -40,7 +79,7 @@ function LyricsPractice({
 
             for (let i = restStart; i < target.length; i++) {
               parts.push(
-                <span key={`h-${index}-${i}`} className="lyrics-hint-text">
+                <span key={`h-${absoluteIndex}-${i}`} className="lyrics-hint-text">
                   {target[i]}
                 </span>,
               )
@@ -49,7 +88,7 @@ function LyricsPractice({
             if (typed.length > target.length) {
               for (let i = target.length; i < typed.length; i++) {
                 parts.push(
-                  <span key={`x-${index}-${i}`} className="lyrics-input-chip">
+                  <span key={`x-${absoluteIndex}-${i}`} className="lyrics-input-chip">
                     {typed[i]}
                   </span>,
                 )
@@ -74,7 +113,7 @@ function LyricsPractice({
                   : ''
           return (
             <div
-              key={`${token.character}-${index}`}
+              key={`${token.character}-${absoluteIndex}`}
               className={`lyrics-token ${isPast ? 'done' : ''} ${isCurrent ? 'current' : ''} ${token.isPunctuation ? 'punct' : ''}`}
             >
               <div className="lyrics-jyutping">
@@ -93,6 +132,19 @@ function LyricsPractice({
           )
         })}
       </article>
+      
+      {/* 分段进度指示器 */}
+      {totalSegments > 1 && (
+        <div className="lyrics-segment-progress">
+          {Array.from({ length: totalSegments }).map((_, idx) => (
+            <div
+              key={`segment-${idx}`}
+              className={`lyrics-segment-dot ${idx === currentSegment ? 'active' : ''}`}
+              title={`段落 ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }

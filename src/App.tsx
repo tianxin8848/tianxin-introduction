@@ -20,6 +20,8 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [lyricIndex, setLyricIndex] = useState(0)
   const [lyricsRookieMode, setLyricsRookieMode] = useState(true)
+  const [lyricsSegmentSize, setLyricsSegmentSize] = useState<number>(50)
+  const [lyricsCurrentSegment, setLyricsCurrentSegment] = useState<number>(0)
   const [input, setInput] = useState('')
   const [isCorrect, setIsCorrect] = useState(false)
   const [score, setScore] = useState(0)
@@ -40,11 +42,34 @@ function App() {
     setInput('')
     setIsCorrect(false)
     let nextIndex = lyricIndex + 1
+    
+    // 跳过标点符号
     while (nextIndex < lyricTokens.length && lyricTokens[nextIndex].isPunctuation) {
       nextIndex += 1
     }
-    setLyricIndex(nextIndex >= lyricTokens.length ? 0 : nextIndex)
-  }, [currentLyricToken, input, lyricIndex])
+    
+    // 如果到达当前段末尾，自动切换到下一段
+    if (nextIndex >= lyricTokens.length) {
+      // 到达歌词末尾，重置到开头
+      setLyricIndex(0)
+      setLyricsCurrentSegment(0)
+    } else {
+      setLyricIndex(nextIndex)
+      
+      // 检查是否需要切换到下一段
+      const currentSegmentStart = lyricsCurrentSegment * lyricsSegmentSize
+      const currentSegmentEnd = Math.min(currentSegmentStart + lyricsSegmentSize, lyricTokens.length)
+      
+      if (nextIndex >= currentSegmentEnd && lyricsSegmentSize > 0) {
+        // 自动切换到下一段
+        const nextSegment = lyricsCurrentSegment + 1
+        const totalSegments = Math.ceil(lyricTokens.length / lyricsSegmentSize)
+        if (nextSegment < totalSegments) {
+          setLyricsCurrentSegment(nextSegment)
+        }
+      }
+    }
+  }, [currentLyricToken, input, lyricIndex, lyricTokens, lyricsCurrentSegment, lyricsSegmentSize])
 
   useEffect(() => {
     let cancelled = false
@@ -202,12 +227,63 @@ function App() {
 
         <TypingStats accuracy={accuracy} score={score} total={total} />
         {isLyricsMode ? (
-          <LyricsPractice
-            tokens={lyricTokens}
-            currentIndex={lyricIndex}
-            input={input}
-            rookieMode={lyricsRookieMode}
-          />
+          <>
+            {/* 分段控制 */}
+            <div className="lyrics-segment-controls">
+              <div className="segment-size-control">
+                <label htmlFor="segmentSize">每段字数: </label>
+                <select
+                  id="segmentSize"
+                  value={lyricsSegmentSize}
+                  onChange={(e) => {
+                    const newSize = parseInt(e.target.value)
+                    setLyricsSegmentSize(newSize)
+                    // 重新计算当前段
+                    const newSegment = Math.floor(lyricIndex / newSize)
+                    setLyricsCurrentSegment(newSegment)
+                  }}
+                >
+                  <option value="30">30字</option>
+                  <option value="50">50字</option>
+                  <option value="80">80字</option>
+                  <option value="100">100字</option>
+                  <option value="0">不分段</option>
+                </select>
+              </div>
+              
+              {lyricsSegmentSize > 0 && (
+                <div className="segment-nav-controls">
+                  <button
+                    onClick={() => setLyricsCurrentSegment(prev => Math.max(0, prev - 1))}
+                    disabled={lyricsCurrentSegment === 0}
+                  >
+                    上一段
+                  </button>
+                  <span className="segment-info">
+                    段落 {lyricsCurrentSegment + 1} / {Math.ceil(lyricTokens.length / lyricsSegmentSize)}
+                  </span>
+                  <button
+                    onClick={() => {
+                      const totalSegments = Math.ceil(lyricTokens.length / lyricsSegmentSize)
+                      setLyricsCurrentSegment(prev => Math.min(totalSegments - 1, prev + 1))
+                    }}
+                    disabled={lyricsCurrentSegment >= Math.ceil(lyricTokens.length / lyricsSegmentSize) - 1}
+                  >
+                    下一段
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            <LyricsPractice
+              tokens={lyricTokens}
+              currentIndex={lyricIndex}
+              input={input}
+              rookieMode={lyricsRookieMode}
+              segmentSize={lyricsSegmentSize}
+              currentSegment={lyricsCurrentSegment}
+            />
+          </>
         ) : isLoadingWords || !currentWord ? (
           <div className="loading-state">正在加载 {selectedFinal} 韻母練習詞...</div>
         ) : (

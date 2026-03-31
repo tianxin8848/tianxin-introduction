@@ -326,6 +326,117 @@ body {
   min-width: 1em;
 }
 
+/* 歌词分段控制 */
+.lyrics-segment-controls {
+  background-color: var(--card-background);
+  padding: 12px 16px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.segment-size-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.segment-size-control label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.segment-size-control select {
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.segment-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.segment-nav-controls button {
+  padding: 6px 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.segment-nav-controls button:hover:not(:disabled) {
+  background-color: #3d8b40;
+}
+
+.segment-nav-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.segment-info {
+  font-size: 14px;
+  color: var(--text-muted);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* 歌词分段导航 */
+.lyrics-segment-nav {
+  text-align: center;
+  margin-bottom: 12px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.lyrics-segment-info {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* 歌词分段进度指示器 */
+.lyrics-segment-progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.lyrics-segment-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.lyrics-segment-dot:hover {
+  background-color: #bbb;
+}
+
+.lyrics-segment-dot.active {
+  background-color: var(--primary-color);
+  transform: scale(1.2);
+}
+
 /* 参考区 */
 .reference-grid-card {
   background-color: var(--card-background);
