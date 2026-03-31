@@ -31,54 +31,123 @@ body {
   line-height: 1.6;
 }
 
-/* 应用容器 */
+/* 应用容器 - 改为侧边栏布局 */
 .app {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
-/* 头部 */
-.header {
+/* 侧边栏 */
+.sidebar {
+  width: 280px;
   background-color: var(--card-background);
   box-shadow: var(--shadow);
   padding: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  z-index: 10;
 }
 
-.header h1 {
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sidebar-header h1 {
   color: var(--primary-color);
-  margin-bottom: 8px;
-  font-size: 28px;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: var(--transition);
+}
+
+.sidebar.collapsed .sidebar-header h1 {
+  opacity: 0;
+  width: 0;
+}
+
+.toggle-sidebar-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-background);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.toggle-sidebar-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .current-final {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   color: var(--text-muted);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: var(--transition);
+}
+
+.sidebar.collapsed .current-final {
+  opacity: 0;
+  height: 0;
+  margin: 0;
 }
 
 .mode-toggle {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
-.lyrics-mode-toggle {
-  margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.sidebar.collapsed .mode-toggle {
+  align-items: center;
 }
 
 .mode-btn {
-  padding: 10px 20px;
+  padding: 10px 16px;
   border: 2px solid var(--border-color);
   background-color: var(--card-background);
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .mode-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  text-align: center;
 }
 
 .mode-btn:hover {
@@ -91,6 +160,16 @@ body {
   border-color: var(--primary-color);
 }
 
+.lyrics-mode-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar.collapsed .lyrics-mode-toggle {
+  align-items: center;
+}
+
 /* 主内容 */
 .main {
   flex: 1;
@@ -100,6 +179,7 @@ body {
   justify-content: flex-start;
   padding: 40px 20px;
   gap: 22px;
+  overflow-y: auto;
 }
 
 /* 进度 */
@@ -522,9 +602,64 @@ body {
 }
 
 /* 响应式设计 */
-@media (max-width: 600px) {
-  .header h1 {
-    font-size: 24px;
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  .sidebar.collapsed {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+  }
+  
+  .sidebar-header {
+    margin-bottom: 15px;
+  }
+  
+  .sidebar-header h1 {
+    font-size: 18px;
+  }
+  
+  .mode-toggle {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .sidebar.collapsed .mode-toggle {
+    display: none;
+  }
+  
+  .mode-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .sidebar.collapsed .mode-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+  
+  .lyrics-mode-toggle {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .sidebar.collapsed .lyrics-mode-toggle {
+    display: none;
+  }
+  
+  .main {
+    padding: 20px 15px;
+    gap: 16px;
   }
   
   .typing-stats {
@@ -545,5 +680,27 @@ body {
   .reference-title {
     width: auto;
     line-height: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-header h1 {
+    font-size: 16px;
+  }
+  
+  .mode-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .sidebar.collapsed .mode-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+  }
+  
+  .main {
+    padding: 15px 10px;
+    gap: 12px;
   }
 }

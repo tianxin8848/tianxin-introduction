@@ -26,6 +26,7 @@ function App() {
   const [isCorrect, setIsCorrect] = useState(false)
   const [score, setScore] = useState(0)
   const [total, setTotal] = useState(0)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   const currentWord = trainingWords[currentIndex]
   const currentLyricToken = lyricTokens[lyricIndex]
@@ -169,27 +170,39 @@ function App() {
 
   return (
     <div className="app">
-      <header className="header">
-        <h1>粵語拼音打字練習</h1>
+      <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
+        <div className="sidebar-header">
+          <h1>粵語拼音打字練習</h1>
+          <button 
+            className="toggle-sidebar-btn"
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            title={sidebarCollapsed ? "展開側邊欄" : "收起側邊欄"}
+          >
+            {sidebarCollapsed ? "→" : "←"}
+          </button>
+        </div>
         <p className="current-final">{isLyricsMode ? '當前模式：歌詞跟打' : `當前韻母：${selectedFinal}`}</p>
         <div className="mode-toggle">
           <button 
             className={`mode-btn ${mode === 'reference' ? 'active' : ''}`}
             onClick={() => switchMode('reference')}
+            title="參考模式"
           >
-            參考模式
+            {sidebarCollapsed ? "參" : "參考模式"}
           </button>
           <button 
             className={`mode-btn ${mode === 'advanced' ? 'active' : ''}`}
             onClick={() => switchMode('advanced')}
+            title="進階模式"
           >
-            進階模式
+            {sidebarCollapsed ? "進" : "進階模式"}
           </button>
           <button
             className={`mode-btn ${mode === 'lyrics' ? 'active' : ''}`}
             onClick={() => switchMode('lyrics')}
+            title="歌詞模式"
           >
-            歌詞模式
+            {sidebarCollapsed ? "歌" : "歌詞模式"}
           </button>
         </div>
         {isLyricsMode && (
@@ -197,18 +210,20 @@ function App() {
             <button
               className={`mode-btn ${lyricsRookieMode ? 'active' : ''}`}
               onClick={() => setLyricsRookieMode(true)}
+              title="菜鳥模式"
             >
-              菜鳥模式
+              {sidebarCollapsed ? "菜" : "菜鳥模式"}
             </button>
             <button
               className={`mode-btn ${!lyricsRookieMode ? 'active' : ''}`}
               onClick={() => setLyricsRookieMode(false)}
+              title="普通模式"
             >
-              普通模式
+              {sidebarCollapsed ? "普" : "普通模式"}
             </button>
           </div>
         )}
-      </header>
+      </aside>
 
       <main className="main">
         <div className="progress-card">
