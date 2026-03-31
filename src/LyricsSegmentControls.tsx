@@ -1,10 +1,11 @@
+import type { Dispatch, SetStateAction } from 'react'
 import type { LyricToken } from './types'
 
 interface LyricsSegmentControlsProps {
   lyricsSegmentSize: number;
-  setLyricsSegmentSize: (size: number) => void;
+  setLyricsSegmentSize: Dispatch<SetStateAction<number>>;
   lyricsCurrentSegment: number;
-  setLyricsCurrentSegment: (segment: number) => void;
+  setLyricsCurrentSegment: Dispatch<SetStateAction<number>>;
   lyricIndex: number;
   lyricTokens: LyricToken[];
 }

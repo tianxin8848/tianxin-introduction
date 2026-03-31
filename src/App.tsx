@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './App.css'
-import type { CantoneseWord, Mode, PolitenessPhrase } from './types'
+import type { CantoneseWord, Mode } from './types'
 import { fetchTrainingWordsByFinal } from './api'
 import ReferenceSections from './ReferenceSections'
 import TypingStats from './TypingStats'
