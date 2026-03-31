@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# 粤语打字练习应用 (Cantonese Typing Practice)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个专为学习粤语拼音（粵拼）设计的打字练习应用，帮助用户提高粤语拼音的输入速度和准确性。
 
-Currently, two official plugins are available:
+## 功能特点
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **多种练习模式**：
+  - 标准打字练习（基于韵母分类）
+  - 歌词练习模式
+  - 礼貌用语练习模式
+- **实时统计**：显示准确率、得分和总尝试次数
+- **进度跟踪**：实时显示练习进度
+- **响应式设计**：适配不同屏幕尺寸
+- **侧边栏导航**：方便切换练习模式和设置
 
-## React Compiler
+## 技术栈
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18
+- TypeScript
+- Vite
+- React Router
 
-## Expanding the ESLint configuration
+## 安装与运行
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 前提条件
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 16.0 或更高版本
+- npm 或 yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 安装步骤
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. 克隆项目
+   ```bash
+   git clone https://github.com/yourusername/cantonese-typing.git
+   cd cantonese-typing
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. 安装依赖
+   ```bash
+   npm install
+   # 或
+   yarn install
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. 启动开发服务器
+   ```bash
+   npm run dev
+   # 或
+   yarn dev
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. 构建生产版本
+   ```bash
+   npm run build
+   # 或
+   yarn build
+   ```
+
+## 使用说明
+
+1. **选择练习模式**：在侧边栏选择不同的练习模式
+2. **标准打字练习**：根据显示的粤语词汇，输入对应的粵拼
+3. **歌词练习**：练习歌词中的粤语词汇
+4. **礼貌用语练习**：练习常用的粤语礼貌用语
+5. **查看统计**：顶部卡片显示当前练习进度和统计数据
+
+## 数据来源
+
+- [香港大学粤语研究](https://corpus.eduhk.hk
