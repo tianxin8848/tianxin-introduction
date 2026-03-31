@@ -49,22 +49,36 @@ function extractLyricsFromHTML(htmlContent) {
     // 分割所有行
     const lines = pContent.split('<br>').map(line => line.trim()).filter(line => line !== '');
     
+    // 调试：显示提取的行
+    console.log(`提取到 ${lines.length} 行:`);
+    lines.forEach((line, idx) => {
+      console.log(`  [${idx}] ${line.substring(0, 50)}${line.length > 50 ? '...' : ''}`);
+    });
+    
     // 配对中文和粤拼行
-    for (let i = 0; i < lines.length; i += 2) {
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      
+      // 跳过包含"翡翠粤语歌词"或URL的行
+      if (line.includes('翡翠粤语歌词') || line.includes('https://')) {
+        i++;
+        continue;
+      }
+      
+      // 尝试找下一行作为粤拼
       if (i + 1 < lines.length) {
-        const chineseText = lines[i];
-        let jyutpingText = lines[i + 1];
+        const nextLine = lines[i + 1];
         
-        // 跳过包含"翡翠粤语歌词"或URL的行
-        if (jyutpingText.includes('翡翠粤语歌词') || jyutpingText.includes('https://')) {
-          // 尝试找下一行作为粤拼
-          if (i + 2 < lines.length) {
-            jyutpingText = lines[i + 2];
-            i++; // 跳过这一行
-          } else {
-            continue; // 没有有效的粤拼行，跳过
-          }
+        // 如果下一行也包含"翡翠粤语歌词"或URL，跳过
+        if (nextLine.includes('翡翠粤语歌词') || nextLine.includes('https://')) {
+          i += 2;
+          continue;
         }
+        
+        // 这一行是中文，下一行是粤拼
+        const chineseText = line;
+        let jyutpingText = nextLine;
         
         // 移除粤拼中的HTML标签
         const cleanJyutpingText = jyutpingText
@@ -74,12 +88,17 @@ function extractLyricsFromHTML(htmlContent) {
           .trim();
         
         // 只添加有内容的行
-        if (chineseText && cleanJyutpingText && !cleanJyutpingText.includes('翡翠粤语歌词')) {
+        if (chineseText && cleanJyutpingText) {
           lyrics.push({
             chinese: chineseText,
             jyutping: cleanJyutpingText
           });
+          console.log(`  添加歌词: "${chineseText.substring(0, 30)}..." -> "${cleanJyutpingText.substring(0, 30)}..."`);
         }
+        
+        i += 2; // 跳过已处理的两行
+      } else {
+        i++; // 没有配对的粤拼行，跳过
       }
     }
   }
@@ -165,17 +184,17 @@ function main() {
     console.log('正在读取输入文件...');
     const inputContent = fs.readFileSync(inputFile, 'utf8');
     
-    console.log('正在提取歌词数据...');
+    console.log('正在提取歌词数据...\n');
     const lyrics = extractLyricsFromHTML(inputContent);
     
-    console.log(`提取到 ${lyrics.length} 段歌词`);
+    console.log(`\n提取到 ${lyrics.length} 段歌词`);
     
-    // 显示提取的歌词示例
-    console.log('\n第一段歌词示例:');
-    if (lyrics.length > 0) {
-      console.log(`中文: ${lyrics[0].chinese}`);
-      console.log(`粤拼: ${lyrics[0].jyutping}`);
-    }
+    // 显示提取的所有歌词
+    console.log('\n所有提取的歌词:');
+    lyrics.forEach((lyric, idx) => {
+      console.log(`[${idx + 1}] 中文: ${lyric.chinese}`);
+      console.log(`     粤拼: ${lyric.jyutping}`);
+    });
     
     console.log('\n正在转换为token数组...');
     const tokens = convertToTokens(lyrics);
@@ -191,20 +210,21 @@ function main() {
     console.log(`转换完成！输出已保存到: ${outputFile}`);
     
     // 显示前几个token作为示例
-    console.log('\n前15个token示例:');
-    tokens.slice(0, 15).forEach((token, i) => {
+    console.log('\n前20个token示例:');
+    tokens.slice(0, 20).forEach((token, i) => {
       console.log(`  ${i + 1}. '${token.character}' -> '${token.jyutping}' ${token.isPunctuation ? '(标点)' : ''}`);
     });
     
     // 显示标点符号token
     const punctuationTokens = tokens.filter(t => t.isPunctuation);
     console.log(`\n共找到 ${punctuationTokens.length} 个标点符号token`);
-    if (punctuationTokens.length > 0) {
-      console.log('标点符号示例:');
-      punctuationTokens.slice(0, 5).forEach((token, i) => {
-        console.log(`  ${i + 1}. '${token.character}'`);
-      });
-    }
+    
+    // 显示最后几个token
+    console.log('\n最后10个token示例:');
+    tokens.slice(-10).forEach((token, i) => {
+      const idx = tokens.length - 10 + i + 1;
+      console.log(`  ${idx}. '${token.character}' -> '${token.jyutping}' ${token.isPunctuation ? '(标点)' : ''}`);
+    });
     
   } catch (error) {
     console.error('转换过程中发生错误:', error);

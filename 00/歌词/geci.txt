@@ -31,4 +31,4 @@
 <p>忘掉爱过的他<br>mong4 diu6 oi3 gwo3 dik1 taa1<br>当初的喜帖金箔印着那位他<br>dong13 co1 dik1 hei2 tip3 gam1 bok6 jan3 zoek6/ naa5 wai6 taa1<br>裱起婚纱照那道墙及一切美丽旧年华<br>biu2 hei2 fan1 saa1 ziu3 naa5 dou6 coeng4 kap6 jat1 cai3 mei5 lai6 gau6 nin4 waa4/<br>翡翠粤语歌词 <span class="d-none d-sm-inline">https://www.feitsui.com/zh-hans/lyrics/294</span><br>明日同步拆下<br>ming4 jat6 tung4 bou6 caak3 haa6<br>忘掉有过的家<br>mong4 diu6 jau5 gwo3 dik1 gaa1<br>小餐台沙发雪柜及两份红茶<br>siu2 caan1 toi4 saa1 faat3 syut3 gwai6 kap6 loeng5 fan6 hung4 caa4<br>温馨的光境不过借出到期拿回吗<br>wan1 hing1 dik1 gwong1 ging2 bat1 gwo3 ze3 ceot1 dou3 kei4 naa4 wui4 maa1<br>终须会时辰到 别怕<br>zung1 seoi1 wui si4 san4 dou3 bit6 paa3</p>
 
 <p>请放下手里那锁匙 好吗<br>cing2/ceng2 fong3 haa6 sau2 leoi5 naa5 so2 ci4/si4 hou2 maa1</p>
-</article> 变成import type { LyricToken } from './types'
+</article> 
