@@ -70,6 +70,7 @@ function App() {
   const accuracy = total > 0 ? Math.round((score / total) * 100) : 0
   const totalWords = trainingWords.length
   const progressPercent = totalWords > 0 ? Math.round(((currentIndex + 1) / totalWords) * 100) : 0
+  const currentProgress = totalWords > 0 ? currentIndex + 1 : 0
 
   return (
     <div className="app">
@@ -96,7 +97,7 @@ function App() {
         <div className="progress-card">
           <div className="progress-header">
             <span>練習進度</span>
-            <span>{currentIndex + 1} / {totalWords}</span>
+            <span>{currentProgress} / {totalWords}</span>
           </div>
           <div className="progress-track">
             <div
@@ -109,7 +110,7 @@ function App() {
 
         <TypingStats accuracy={accuracy} score={score} total={total} />
         {isLoadingWords || !currentWord ? (
-          <div className="loading-state">正在生成 {selectedFinal} 韻母練習詞...</div>
+          <div className="loading-state">正在加载 {selectedFinal} 韻母練習詞...</div>
         ) : (
           <TypingPractice
             currentWord={currentWord}
