@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { cantoneseWords } from './data'
 import type { Mode } from './types'
 import { validateCantoneseJyutping } from './api'
+import ReferenceSections from './ReferenceSections'
+import TypingStats from './TypingStats'
+import TypingPractice from './TypingPractice'
 
 function App() {
   const [mode, setMode] = useState<Mode>('reference')
@@ -13,16 +16,6 @@ function App() {
   const [total, setTotal] = useState(0)
 
   const currentWord = cantoneseWords[currentIndex]
-
-  useEffect(() => {
-    setInput('')
-    setIsCorrect(false)
-  }, [currentIndex])
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
-    setIsCorrect(false)
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,6 +34,8 @@ function App() {
       setScore(prev => prev + 1)
       setTotal(prev => prev + 1)
       setTimeout(() => {
+        setInput('')
+        setIsCorrect(false)
         setCurrentIndex(prev => (prev + 1) % cantoneseWords.length)
       }, 500)
     } else {
@@ -87,30 +82,20 @@ function App() {
           <div className="progress-percent">{progressPercent}%</div>
         </div>
 
-        <div className="word-container">
-          <div className="character">{currentWord.character}</div>
-          {mode === 'reference' && (
-            <div className="jyutping">{currentWord.jyutping}</div>
-          )}
-          <div className="meaning">{currentWord.meaning}</div>
-        </div>
+        <TypingStats accuracy={accuracy} score={score} total={total} />
+        <TypingPractice
+          currentWord={currentWord}
+          mode={mode}
+          input={input}
+          isCorrect={isCorrect}
+          onInputChange={(value) => {
+            setInput(value)
+            setIsCorrect(false)
+          }}
+          onSubmit={handleSubmit}
+        />
 
-        <form onSubmit={handleSubmit} className="input-form">
-          <input
-            type="text"
-            value={input}
-            onChange={handleInputChange}
-            placeholder="請輸入粵語拼音..."
-            className={isCorrect ? 'correct' : ''}
-            autoFocus
-          />
-          <button type="submit">提交</button>
-        </form>
-
-        <div className="stats">
-          <div>正確率: {accuracy}%</div>
-          <div>分數: {score} / {total}</div>
-        </div>
+        <ReferenceSections />
       </main>
 
       <footer className="footer">

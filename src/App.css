@@ -85,9 +85,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 40px 20px;
-  gap: 30px;
+  gap: 22px;
 }
 
 /* 进度 */
@@ -128,95 +128,148 @@ body {
   font-size: 14px;
 }
 
-/* 单词容器 */
-.word-container {
-  background-color: var(--card-background);
-  padding: 40px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  text-align: center;
-  min-width: 300px;
-  max-width: 500px;
+/* 统计信息 */
+.typing-stats {
   width: 100%;
-}
-
-.character {
-  font-size: 72px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: var(--text-color);
-}
-
-.jyutping {
-  font-size: 32px;
-  color: var(--secondary-color);
-  margin-bottom: 10px;
-  font-family: monospace;
-}
-
-.meaning {
-  font-size: 18px;
+  max-width: 760px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
   color: var(--text-muted);
 }
 
-/* 输入表单 */
-.input-form {
+.stat-item {
   display: flex;
-  gap: 10px;
-  width: 100%;
-  max-width: 500px;
-}
-
-.input-form input {
-  flex: 1;
-  padding: 15px;
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius);
+  gap: 8px;
+  align-items: baseline;
   font-size: 18px;
-  transition: var(--transition);
 }
 
-.input-form input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+.stat-label {
+  color: #7d7d7d;
 }
 
-.input-form input.correct {
-  border-color: var(--correct-color);
-  background-color: rgba(76, 175, 80, 0.1);
+.stat-value {
+  color: var(--text-color);
+  font-weight: 600;
 }
 
-.input-form button {
-  padding: 15px 30px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.input-form button:hover {
-  background-color: #45a049;
-}
-
-.input-form button:active {
-  transform: scale(0.98);
-}
-
-/* 统计信息 */
-.stats {
+/* 练习区 */
+.typing-practice {
+  width: 100%;
+  max-width: 860px;
+  min-height: 260px;
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing-input-form {
+  width: min(92%, 520px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.typing-input-form input {
+  width: 100%;
+  text-align: center;
+  padding: 12px 16px;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: #4a4a4a;
+  background-color: #ffffff;
+  transition: var(--transition);
+}
+
+.typing-input-form input::placeholder {
+  color: #c3c3c3;
+}
+
+.typing-input-form input:focus {
+  outline: none;
+  border-color: #87c0ff;
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
+}
+
+.typing-input-form input.correct {
+  border-color: #8ac17d;
+  background-color: #f0f9ed;
+}
+
+.reference-answer {
+  font-size: 14px;
+  color: #9a9a9a;
+}
+
+.typing-character-wrap {
+  text-align: center;
+}
+
+.typing-character {
+  font-size: clamp(72px, 11vw, 132px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #b8b8b8;
+}
+
+.typing-meaning {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #9d9d9d;
+}
+
+/* 参考区 */
+.reference-grid-card {
   background-color: var(--card-background);
-  padding: 20px 40px;
+  padding: 16px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  font-size: 18px;
-  font-weight: 500;
+  width: 100%;
+  max-width: 760px;
+}
+
+.reference-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.reference-row:last-child {
+  margin-bottom: 0;
+}
+
+.reference-title {
+  width: 28px;
+  flex-shrink: 0;
+  font-weight: 700;
+  line-height: 34px;
+}
+
+.reference-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.reference-item {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #7a7a7a;
+  border-radius: 6px;
+  background-color: #f0ede3;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 /* 底部 */
@@ -244,27 +297,23 @@ body {
     font-size: 24px;
   }
   
-  .word-container {
-    padding: 30px;
-    min-width: 250px;
+  .typing-stats {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
   }
-  
-  .character {
-    font-size: 56px;
-  }
-  
-  .jyutping {
+
+  .typing-input-form input {
     font-size: 24px;
   }
-  
-  .input-form {
+
+  .reference-row {
     flex-direction: column;
+    gap: 6px;
   }
-  
-  .stats {
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    text-align: center;
+
+  .reference-title {
+    width: auto;
+    line-height: normal;
   }
 }
