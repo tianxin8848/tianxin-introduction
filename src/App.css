@@ -1,0 +1,232 @@
+/* 全局样式 */
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #2196F3;
+  --background-color: #f5f5f5;
+  --card-background: #ffffff;
+  --text-color: #333333;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+  --correct-color: #4CAF50;
+  --error-color: #f44336;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* 应用容器 */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.header {
+  background-color: var(--card-background);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-align: center;
+}
+
+.header h1 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.mode-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mode-btn {
+  padding: 10px 20px;
+  border: 2px solid var(--border-color);
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mode-btn:hover {
+  border-color: var(--primary-color);
+}
+
+.mode-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* 主内容 */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 30px;
+}
+
+/* 单词容器 */
+.word-container {
+  background-color: var(--card-background);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  min-width: 300px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.character {
+  font-size: 72px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.jyutping {
+  font-size: 32px;
+  color: var(--secondary-color);
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+
+.meaning {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+/* 输入表单 */
+.input-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.input-form input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 18px;
+  transition: var(--transition);
+}
+
+.input-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.input-form input.correct {
+  border-color: var(--correct-color);
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.input-form button {
+  padding: 15px 30px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.input-form button:hover {
+  background-color: #45a049;
+}
+
+.input-form button:active {
+  transform: scale(0.98);
+}
+
+/* 统计信息 */
+.stats {
+  display: flex;
+  gap: 40px;
+  background-color: var(--card-background);
+  padding: 20px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* 底部 */
+.footer {
+  background-color: var(--card-background);
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 24px;
+  }
+  
+  .word-container {
+    padding: 30px;
+    min-width: 250px;
+  }
+  
+  .character {
+    font-size: 56px;
+  }
+  
+  .jyutping {
+    font-size: 24px;
+  }
+  
+  .input-form {
+    flex-direction: column;
+  }
+  
+  .stats {
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+}
