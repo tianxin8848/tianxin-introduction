@@ -10,4 +10,11 @@ export interface LyricToken {
   isPunctuation?: boolean;
 }
 
-export type Mode = 'reference' | 'advanced' | 'lyrics';
+export interface PolitenessPhrase {
+  character: string;
+  jyutping: string;
+  meaning: string;
+  category: string;
+}
+
+export type Mode = 'reference' | 'advanced' | 'lyrics' | 'politeness';
