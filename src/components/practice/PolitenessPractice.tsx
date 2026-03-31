@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import type { PolitenessPhrase } from '../../types'
+import { politenessPhrases } from '../../data/politenessData'
 
 interface PolitenessPracticeProps {
   currentPhrase: PolitenessPhrase | undefined
@@ -46,6 +47,19 @@ function PolitenessPractice({
           <span className="category-value">{currentPhrase.category}</span>
         </div>
       </div>
+
+      <section className="all-politeness-phrases">
+        <h3>所有礼貌用语</h3>
+        <div className="phrases-grid">
+          {politenessPhrases.map((phrase, index) => (
+            <div key={index} className="phrase-item">
+              <span className="phrase-character">{phrase.character}</span>
+              <span className="phrase-jyutping">{phrase.jyutping}</span>
+              <span className="phrase-meaning">{phrase.meaning}</span>
+            </div>
+          ))}
+        </div>
+      </section>
     </section>
   )
 }

@@ -704,3 +704,137 @@ body {
     gap: 12px;
   }
 }
+
+/* 礼貌用语练习区 */
+.politeness-practice {
+  width: 100%;
+  max-width: 860px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.politeness-phrase-wrap {
+  text-align: center;
+}
+
+.politeness-character {
+  font-size: clamp(72px, 11vw, 132px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #b8b8b8;
+}
+
+.politeness-meaning {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #9d9d9d;
+}
+
+.politeness-category {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #9d9d9d;
+}
+
+.category-label {
+  font-weight: 500;
+}
+
+.category-value {
+  color: var(--secondary-color);
+}
+
+/* 所有礼貌用语 */
+.all-politeness-phrases {
+  width: 100%;
+  max-width: 860px;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.all-politeness-phrases h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+.phrases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.phrase-item {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: #f9f9f9;
+  transition: var(--transition);
+}
+
+.phrase-item:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.phrase-character {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+.phrase-jyutping {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.phrase-meaning {
+  display: block;
+  font-size: 13px;
+  color: #9d9d9d;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .phrases-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .all-politeness-phrases {
+    padding: 15px;
+  }
+  
+  .phrase-character {
+    font-size: 15px;
+  }
+  
+  .phrase-jyutping {
+    font-size: 13px;
+  }
+  
+  .phrase-meaning {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phrases-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .all-politeness-phrases h3 {
+    font-size: 16px;
+  }
+}

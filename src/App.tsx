@@ -184,7 +184,9 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>數據參考: <a href="https://jyutping.io/tutorial" target="_blank" rel="noopener noreferrer">粵拼.io</a></p>
+          <p>數據參考: <a href="https://corpus.eduhk.hk/cantonese" target="_blank" rel="noopener noreferrer">香港大学粤语研究</a></p>
+          <p>數據參考: <a href="https://jyutping.io/tutorial" target="_blank" rel="noopener noreferrer">粵拼.io</a></p>
+          <p>致谢: to those who support me</p>
       </footer>
     </div>
   )
