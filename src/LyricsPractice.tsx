@@ -29,16 +29,6 @@ function LyricsPractice({
   // 获取当前段落的tokens
   const currentTokens = getCurrentSegmentTokens()
   
-  // 计算在当前段落中的相对索引
-  const getRelativeIndex = (absoluteIndex: number) => {
-    if (segmentSize <= 0) return absoluteIndex
-    
-    const segmentStart = currentSegment * segmentSize
-    return absoluteIndex - segmentStart
-  }
-  
-  const relativeCurrentIndex = getRelativeIndex(currentIndex)
-  
   // 计算总段数
   const totalSegments = segmentSize > 0 ? Math.ceil(tokens.length / segmentSize) : 1
   
