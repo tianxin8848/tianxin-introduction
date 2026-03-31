@@ -7,6 +7,8 @@ import ReferenceSections from './ReferenceSections'
 import TypingStats from './TypingStats'
 import TypingPractice from './TypingPractice'
 import { isJyutpingFinal } from './finals'
+import LyricsPractice from './LyricsPractice'
+import { lyricTokens } from './lyricsData'
 
 function App() {
   const { final = 'aa' } = useParams()
@@ -16,12 +18,15 @@ function App() {
   const [trainingWords, setTrainingWords] = useState<CantoneseWord[]>([])
   const [isLoadingWords, setIsLoadingWords] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [lyricIndex, setLyricIndex] = useState(0)
   const [input, setInput] = useState('')
   const [isCorrect, setIsCorrect] = useState(false)
   const [score, setScore] = useState(0)
   const [total, setTotal] = useState(0)
 
   const currentWord = trainingWords[currentIndex]
+  const currentLyricToken = lyricTokens[lyricIndex]
+  const isLyricsMode = mode === 'lyrics'
 
   useEffect(() => {
     let cancelled = false
@@ -32,6 +37,7 @@ function App() {
       if (cancelled) return
       setTrainingWords(words)
       setCurrentIndex(0)
+      setLyricIndex(0)
       setInput('')
       setIsCorrect(false)
       setScore(0)
@@ -48,6 +54,24 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (isLyricsMode) {
+      if (!currentLyricToken || currentLyricToken.isPunctuation) return
+      const normalizedInput = input.trim().toLowerCase()
+      const isMatched = normalizedInput === currentLyricToken.jyutping.toLowerCase()
+      setTotal(prev => prev + 1)
+      if (!isMatched) return
+
+      setScore(prev => prev + 1)
+      setInput('')
+      setIsCorrect(false)
+      let nextIndex = lyricIndex + 1
+      while (nextIndex < lyricTokens.length && lyricTokens[nextIndex].isPunctuation) {
+        nextIndex += 1
+      }
+      setLyricIndex(nextIndex >= lyricTokens.length ? 0 : nextIndex)
+      return
+    }
+
     if (!currentWord) return
 
     const normalizedInput = input.trim().toLowerCase()
@@ -68,27 +92,49 @@ function App() {
   }
 
   const accuracy = total > 0 ? Math.round((score / total) * 100) : 0
-  const totalWords = trainingWords.length
-  const progressPercent = totalWords > 0 ? Math.round(((currentIndex + 1) / totalWords) * 100) : 0
-  const currentProgress = totalWords > 0 ? currentIndex + 1 : 0
+  const totalWords = isLyricsMode ? lyricTokens.filter((token) => !token.isPunctuation).length : trainingWords.length
+  const progressBase = isLyricsMode
+    ? lyricTokens.slice(0, lyricIndex + 1).filter((token) => !token.isPunctuation).length
+    : currentIndex + 1
+  const progressPercent = totalWords > 0 ? Math.round((progressBase / totalWords) * 100) : 0
+  const currentProgress = totalWords > 0 ? progressBase : 0
+
+  const switchMode = (nextMode: Mode) => {
+    setMode(nextMode)
+    setInput('')
+    setIsCorrect(false)
+    setScore(0)
+    setTotal(0)
+    if (nextMode === 'lyrics') {
+      setLyricIndex(0)
+      return
+    }
+    setCurrentIndex(0)
+  }
 
   return (
     <div className="app">
       <header className="header">
         <h1>粵語拼音打字練習</h1>
-        <p className="current-final">當前韻母：{selectedFinal}</p>
+        <p className="current-final">{isLyricsMode ? '當前模式：歌詞跟打' : `當前韻母：${selectedFinal}`}</p>
         <div className="mode-toggle">
           <button 
             className={`mode-btn ${mode === 'reference' ? 'active' : ''}`}
-            onClick={() => setMode('reference')}
+            onClick={() => switchMode('reference')}
           >
             參考模式
           </button>
           <button 
             className={`mode-btn ${mode === 'advanced' ? 'active' : ''}`}
-            onClick={() => setMode('advanced')}
+            onClick={() => switchMode('advanced')}
           >
             進階模式
+          </button>
+          <button
+            className={`mode-btn ${mode === 'lyrics' ? 'active' : ''}`}
+            onClick={() => switchMode('lyrics')}
+          >
+            歌詞模式
           </button>
         </div>
       </header>
@@ -109,7 +155,18 @@ function App() {
         </div>
 
         <TypingStats accuracy={accuracy} score={score} total={total} />
-        {isLoadingWords || !currentWord ? (
+        {isLyricsMode ? (
+          <LyricsPractice
+            tokens={lyricTokens}
+            currentIndex={lyricIndex}
+            input={input}
+            onInputChange={(value) => {
+              setInput(value)
+              setIsCorrect(false)
+            }}
+            onSubmit={handleSubmit}
+          />
+        ) : isLoadingWords || !currentWord ? (
           <div className="loading-state">正在加载 {selectedFinal} 韻母練習詞...</div>
         ) : (
           <TypingPractice

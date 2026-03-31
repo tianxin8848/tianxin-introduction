@@ -4,4 +4,10 @@ export interface CantoneseWord {
   meaning: string;
 }
 
-export type Mode = 'reference' | 'advanced';
+export interface LyricToken {
+  character: string;
+  jyutping: string;
+  isPunctuation?: boolean;
+}
+
+export type Mode = 'reference' | 'advanced' | 'lyrics';
