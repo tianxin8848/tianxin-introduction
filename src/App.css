@@ -263,33 +263,47 @@ body {
 }
 
 .lyrics-jyutping {
-  min-height: 2.1em;
+  min-height: 1.2em;
   margin-bottom: 4px;
-  color: #8f8f8f;
+  color: #9b9b9b;
   font-size: 15px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 3px;
+  justify-content: center;
+  position: relative;
+  width: 100%;
 }
 
-.lyrics-hint {
+.lyrics-jyutping::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: #e3e3e3;
+  opacity: 0.95;
+}
+
+.lyrics-hint-text {
   color: #9b9b9b;
 }
 
-.lyrics-input-boxes {
+.lyrics-jyutping-plain {
   display: inline-flex;
-  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.lyrics-input-box {
-  min-width: 16px;
-  height: 18px;
-  padding: 0 4px;
-  border-radius: 3px;
+.lyrics-input-chip {
+  display: inline-block;
   background: #1f1f1f;
-  color: #fff;
-  font-size: 12px;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 0 3px;
+  margin: 0 1px;
+  font-size: 13px;
   line-height: 18px;
   font-weight: 600;
 }
