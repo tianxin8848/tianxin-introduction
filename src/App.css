@@ -298,11 +298,11 @@ body {
 
 .lyrics-input-chip {
   display: inline-block;
-  background: #1f1f1f;
-  color: #ffffff;
+  /* background: #1f1f1f; */
+  color:#1f1f1f;
   border-radius: 3px;
-  padding: 0 3px;
-  margin: 0 1px;
+  /* padding: 0 3px; */
+  /* margin: 0 1px; */
   font-size: 13px;
   line-height: 18px;
   font-weight: 600;
