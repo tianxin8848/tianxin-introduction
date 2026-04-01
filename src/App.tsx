@@ -164,19 +164,13 @@ function App() {
             }}
             onSubmit={handleSubmit}
           />
-        ) : typingMode.isLoading || !typingMode.currentWord ? (
+        ) : typingMode.isLoading ? (
           <div className="loading-state">正在加载 {selectedFinal} 韻母練習詞...</div>
         ) : (
           <TypingPractice
-            currentWord={typingMode.currentWord}
-            mode={mode}
+            words={typingMode.trainingWords}
+            currentIndex={typingMode.currentIndex}
             input={score.input}
-            isCorrect={score.isCorrect}
-            onInputChange={(value) => {
-              score.setInput(value)
-              score.setCorrect(false)
-            }}
-            onSubmit={handleSubmit}
           />
         )}
 

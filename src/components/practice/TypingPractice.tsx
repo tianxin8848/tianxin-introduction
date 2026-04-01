@@ -1,42 +1,43 @@
-import type { CantoneseWord, Mode } from '../../types'
+import type { CantoneseWord } from '../../types'
 
 interface TypingPracticeProps {
-  currentWord: CantoneseWord
-  mode: Mode
+  words: CantoneseWord[]
+  currentIndex: number
   input: string
-  isCorrect: boolean
-  onInputChange: (value: string) => void
-  onSubmit: (e: React.FormEvent) => void
 }
 
 function TypingPractice({
-  currentWord,
-  mode,
+  words,
+  currentIndex,
   input,
-  isCorrect,
-  onInputChange,
-  onSubmit,
 }: TypingPracticeProps) {
   return (
     <section className="typing-practice">
-      <form onSubmit={onSubmit} className="typing-input-form">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => onInputChange(e.target.value)}
-          placeholder="請輸入粵語拼音..."
-          className={isCorrect ? 'correct' : ''}
-          autoFocus
-        />
-        {mode === 'reference' && (
-          <div className="reference-answer">提示：{currentWord.jyutping}</div>
-        )}
-      </form>
+      <article className="typing-line" aria-label="打字練習">
+        {words.map((word, index) => {
+          const isPast = index < currentIndex
+          const isCurrent = index === currentIndex
 
-      <div className="typing-character-wrap">
-        <div className="typing-character">{currentWord.character}</div>
-        <div className="typing-meaning">{currentWord.meaning}</div>
-      </div>
+          return (
+            <div
+              key={`${word.character}-${index}`}
+              className={`typing-token ${isPast ? 'done' : ''} ${isCurrent ? 'current' : ''}`}
+            >
+              <div className="typing-jyutping">
+                <span className="typing-hint-text">
+                  {isPast
+                    ? word.jyutping
+                    : isCurrent
+                    ? input
+                    : ''}
+                </span>
+              </div>
+              <span className="typing-character">{word.character}</span>
+              <div className="typing-meaning">{word.meaning}</div>
+            </div>
+          )
+        })}
+      </article>
     </section>
   )
 }
