@@ -1,11 +1,11 @@
-import { useMemo, useState, useCallback } from 'react'
+import React, { useMemo, useState, useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import './App.css'
 import type { Mode } from './types'
 import { isJyutpingFinal } from './data/finals'
 import { lyricTokens } from './data/lyricsData'
 import { politenessPhrases } from './data/politenessData'
-import { useTypingMode, useLyricsMode, usePolitenessMode, useScore } from './hooks'
+import { useTypingMode, useLyricsMode, usePolitenessMode, useScore, useKeyboard } from './hooks'
 
 // Components
 import Sidebar from './components/layout/Sidebar'
@@ -33,6 +33,23 @@ function App() {
   const lyricsMode = useLyricsMode({ tokens: lyricTokens })
   const politenessMode = usePolitenessMode({ phrases: politenessPhrases })
   const score = useScore()
+  
+  // Keyboard input handling
+  const keyboard = useKeyboard({
+    isActive: true,
+    onEnter: () => {
+      // Create a synthetic form event for handleSubmit
+      const mockEvent = {
+        preventDefault: () => {}
+      } as React.FormEvent
+      handleSubmit(mockEvent)
+    }
+  })
+  
+  // Sync keyboard input with score input
+  useEffect(() => {
+    score.setInput(keyboard.input)
+  }, [keyboard.input, score])
 
   // Handle mode switching
   const switchMode = useCallback((nextMode: Mode) => {
