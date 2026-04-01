@@ -171,6 +171,7 @@ function App() {
             words={typingMode.trainingWords}
             currentIndex={typingMode.currentIndex}
             input={score.input}
+            rookieMode={mode === 'reference'}
           />
         )}
 
