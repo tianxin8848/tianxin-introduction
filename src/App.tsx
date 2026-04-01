@@ -75,6 +75,7 @@ function App() {
       if (isMatched) {
         score.setCorrect(true)
         score.incrementScore()
+        keyboard.clearInput() // 立即清空输入
         setTimeout(() => {
           score.setCorrect(false)
         }, 500)
@@ -88,6 +89,7 @@ function App() {
       if (isMatched) {
         score.setCorrect(true)
         score.incrementScore()
+        keyboard.clearInput() // 立即清空输入
         setTimeout(() => {
           score.setCorrect(false)
         }, 500)
@@ -105,12 +107,13 @@ function App() {
     if (isMatched) {
       score.setCorrect(true)
       score.incrementScore()
+      keyboard.clearInput() // 立即清空输入
       setTimeout(() => {
         score.setCorrect(false)
         typingMode.nextWord()
       }, 500)
     }
-  }, [isLyricsMode, isPolitenessMode, lyricsMode, politenessMode, typingMode, score])
+  }, [isLyricsMode, isPolitenessMode, lyricsMode, politenessMode, typingMode, score, keyboard])
 
   // Calculate progress
   const totalWords = isLyricsMode
