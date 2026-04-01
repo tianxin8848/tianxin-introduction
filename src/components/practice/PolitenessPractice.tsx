@@ -17,13 +17,13 @@ function PolitenessPractice({
   onInputChange,
   onSubmit
 }: PolitenessPracticeProps) {
-  if (!currentPhrase) return null
-
   useEffect(() => {
     if (isCorrect) {
       onInputChange('')
     }
   }, [isCorrect, onInputChange])
+
+  if (!currentPhrase) return null
 
   return (
     <section className="politeness-practice">
