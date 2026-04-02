@@ -5,6 +5,7 @@ interface LyricsPracticeProps {
   currentIndex: number
   input: string
   rookieMode: boolean
+  isCorrect?: boolean
   segmentSize?: number
   currentSegment?: number
 }
@@ -14,6 +15,7 @@ function LyricsPractice({
   currentIndex,
   input,
   rookieMode,
+  isCorrect = false,
   segmentSize = 50,
   currentSegment = 0,
 }: LyricsPracticeProps) {
@@ -109,7 +111,15 @@ function LyricsPractice({
               <div className="lyrics-jyutping">
                 {rookieMode ? (
                   isCurrent ? (
-                    <span className="lyrics-jyutping-plain">{renderRookieJyutping()}</span>
+                    // 关键：当 input 已清空（例如按回车后切到下一字），
+                    // renderRookieJyutping() 会把拼音拆成多个 span，和“非当前 token”
+                    // 的单个 lyrics-hint-text 视觉度量不完全一致，容易造成闪动。
+                    // 所以 input 为空时直接复用非当前 token 的渲染方式。
+                    isCorrect || input.length === 0 ? (
+                      <span className="lyrics-hint-text">{target}</span>
+                    ) : (
+                      <span className="lyrics-jyutping-plain">{renderRookieJyutping()}</span>
+                    )
                   ) : (
                     <span className="lyrics-hint-text">{topText}</span>
                   )

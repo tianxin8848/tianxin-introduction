@@ -367,6 +367,12 @@ body {
 
 .lyrics-hint-text {
   color: #9b9b9b;
+  /* 让当前/非当前 token 的 hint 文本在同一排版度量下渲染，
+     避免基准高度在输入推进时“突然上跳”。 */
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  display: inline-block;
 }
 
 .lyrics-jyutping-plain {

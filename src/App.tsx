@@ -169,6 +169,7 @@ function App() {
               currentIndex={lyricsMode.lyricIndex}
               input={score.input}
               rookieMode={lyricsRookieMode}
+              isCorrect={score.isCorrect}
               segmentSize={lyricsMode.segmentSize}
               currentSegment={lyricsMode.currentSegment}
             />
