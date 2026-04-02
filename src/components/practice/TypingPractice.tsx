@@ -6,6 +6,7 @@ interface TypingPracticeProps {
   currentIndex: number
   input: string
   rookieMode?: boolean
+  isCorrect?: boolean
 }
 
 function TypingPractice({
@@ -13,6 +14,7 @@ function TypingPractice({
   currentIndex,
   input,
   rookieMode = false,
+  isCorrect = false,
 }: TypingPracticeProps) {
   // 参考模式（rookieMode）下：只渲染当前附近的一小段，避免一次性渲染过多 DOM。
   const referenceWindowSize = 50
@@ -33,7 +35,11 @@ function TypingPractice({
           const isPast = absoluteIndex < currentIndex
           const isCurrent = absoluteIndex === currentIndex
           const target = word.jyutping
-          const typed = isCurrent ? input : ''
+          // 在“刚刚答对”的过渡期（App 里延迟 nextWord()）input 会被清空，
+          // 如果这里直接用空 input 渲染，会造成当前字闪一下再变空。
+          // 因此在过渡期用目标拼音替代 input，保持当前字显示为“已完成状态”。
+          const displayInput = isCurrent && isCorrect ? target : input
+          const typed = isCurrent ? displayInput : ''
 
           const renderRookieJyutping = () => {
             // 菜鸟模式：灰色底纹显示正确拼音；已输入前缀用小圆角 chip 覆盖
@@ -88,7 +94,7 @@ function TypingPractice({
               isPast
               ? word.jyutping
               : isCurrent
-                ? input
+                ? displayInput
                 : ''
 
           return (

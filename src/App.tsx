@@ -192,6 +192,7 @@ function App() {
             currentIndex={typingMode.currentIndex}
             input={score.input}
             rookieMode={mode === 'reference'}
+            isCorrect={score.isCorrect}
           />
         )}
 
