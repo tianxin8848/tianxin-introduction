@@ -1,4 +1,5 @@
 import type { CantoneseWord } from '../../types'
+import './TypingPractice.css'
 
 interface TypingPracticeProps {
   words: CantoneseWord[]
@@ -13,12 +14,24 @@ function TypingPractice({
   input,
   rookieMode = false,
 }: TypingPracticeProps) {
+  // 参考模式（rookieMode）下：只渲染当前附近的一小段，避免一次性渲染过多 DOM。
+  const referenceWindowSize = 50
+  const startIndex = rookieMode
+    ? Math.max(0, currentIndex - Math.floor(referenceWindowSize / 2))
+    : 0
+  const endIndex = rookieMode
+    ? Math.min(words.length, startIndex + referenceWindowSize)
+    : words.length
+  const visibleWords = rookieMode ? words.slice(startIndex, endIndex) : words
+
   return (
     <section className="typing-practice">
       <article className="typing-line" aria-label="打字練習">
-        {words.map((word, index) => {
-          const isPast = index < currentIndex
-          const isCurrent = index === currentIndex
+        {visibleWords.map((word, indexWithinWindow) => {
+          const absoluteIndex = rookieMode ? startIndex + indexWithinWindow : indexWithinWindow
+
+          const isPast = absoluteIndex < currentIndex
+          const isCurrent = absoluteIndex === currentIndex
           const target = word.jyutping
           const typed = isCurrent ? input : ''
 
@@ -30,7 +43,10 @@ function TypingPractice({
             const parts: React.ReactNode[] = []
             for (let i = 0; i < prefixLen; i++) {
               parts.push(
-                <span key={`t-${index}-${i}`} className="typing-input-chip">
+                <span
+                  key={`t-${absoluteIndex}-${i}`}
+                  className="typing-input-chip"
+                >
                   {typed[i]}
                 </span>,
               )
@@ -38,7 +54,10 @@ function TypingPractice({
 
             for (let i = restStart; i < target.length; i++) {
               parts.push(
-                <span key={`h-${index}-${i}`} className="typing-hint-text">
+                <span
+                  key={`h-${absoluteIndex}-${i}`}
+                  className="typing-hint-text"
+                >
                   {target[i]}
                 </span>,
               )
@@ -47,7 +66,10 @@ function TypingPractice({
             if (typed.length > target.length) {
               for (let i = target.length; i < typed.length; i++) {
                 parts.push(
-                  <span key={`x-${index}-${i}`} className="typing-input-chip">
+                  <span
+                    key={`x-${absoluteIndex}-${i}`}
+                    className="typing-input-chip"
+                  >
                     {typed[i]}
                   </span>,
                 )
@@ -71,7 +93,7 @@ function TypingPractice({
 
           return (
             <div
-              key={`${word.character}-${index}`}
+              key={`${word.character}-${absoluteIndex}`}
               className={`typing-token ${isPast ? 'done' : ''} ${isCurrent ? 'current' : ''}`}
             >
               <div className="typing-jyutping">
