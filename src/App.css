@@ -113,17 +113,6 @@ body {
   margin: 0;
 }
 
-.mode-toggle {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.sidebar.collapsed .mode-toggle {
-  align-items: center;
-}
-
 .mode-btn {
   padding: 10px 16px;
   border: 2px solid var(--border-color);
@@ -298,16 +287,6 @@ body {
   
   .sidebar-header h1 {
     font-size: 18px;
-  }
-  
-  .mode-toggle {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .sidebar.collapsed .mode-toggle {
-    display: none;
   }
   
   .mode-btn {
