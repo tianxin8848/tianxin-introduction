@@ -1,4 +1,13 @@
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import type { LyricToken } from '../../types'
+import {
+  charBaseSx,
+  hintTextSx,
+  inputChipSx,
+  jyutpingPlainSx,
+  jyutpingRowSx,
+} from './muiPracticeStyles'
 
 interface LyricsPracticeProps {
   tokens: LyricToken[]
@@ -19,33 +28,60 @@ function LyricsPractice({
   segmentSize = 50,
   currentSegment = 0,
 }: LyricsPracticeProps) {
-  // 计算当前显示的tokens段
   const getCurrentSegmentTokens = () => {
     if (segmentSize <= 0) return tokens
-    
+
     const startIndex = currentSegment * segmentSize
     const endIndex = Math.min(startIndex + segmentSize, tokens.length)
     return tokens.slice(startIndex, endIndex)
   }
-  
-  // 获取当前段落的tokens
+
   const currentTokens = getCurrentSegmentTokens()
-  
-  // 计算总段数
   const totalSegments = segmentSize > 0 ? Math.ceil(tokens.length / segmentSize) : 1
-  
+
   return (
-    <section className="lyrics-practice">
-      {/* 分段导航（如果有多段） */}
+    <Box
+      component="section"
+      sx={{
+        width: '100%',
+        maxWidth: 980,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 1,
+      }}
+    >
       {totalSegments > 1 && (
-        <div className="lyrics-segment-nav">
-          <span className="lyrics-segment-info">
+        <Box
+          sx={{
+            textAlign: 'center',
+            mb: 1.5,
+            py: 1,
+            px: 1,
+            bgcolor: 'grey.50',
+            borderRadius: 1,
+            width: '100%',
+          }}
+        >
+          <Typography variant="body2" color="text.secondary" fontWeight={500}>
             段落 {currentSegment + 1} / {totalSegments}
-          </span>
-        </div>
+          </Typography>
+        </Box>
       )}
-      
-      <article className="lyrics-line" aria-label="歌詞打字">
+
+      <Box
+        component="article"
+        aria-label="歌詞打字"
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '10px 6px',
+          py: 0.75,
+          px: 1.25,
+        }}
+      >
         {currentTokens.map((token, segmentIndex) => {
           const absoluteIndex = currentSegment * segmentSize + segmentIndex
           const isPast = absoluteIndex < currentIndex
@@ -56,33 +92,32 @@ function LyricsPractice({
           const renderRookieJyutping = () => {
             if (token.isPunctuation) return null
 
-            // 菜鸟模式：灰色底纹显示正确拼音；已输入前缀用小圆角 chip 覆盖（不再使用固定方块输入框）。
             const prefixLen = Math.min(typed.length, target.length)
             const restStart = prefixLen
 
             const parts: React.ReactNode[] = []
             for (let i = 0; i < prefixLen; i++) {
               parts.push(
-                <span key={`t-${absoluteIndex}-${i}`} className="lyrics-input-chip">
+                <Typography key={`t-${absoluteIndex}-${i}`} component="span" sx={inputChipSx}>
                   {typed[i]}
-                </span>,
+                </Typography>,
               )
             }
 
             for (let i = restStart; i < target.length; i++) {
               parts.push(
-                <span key={`h-${absoluteIndex}-${i}`} className="lyrics-hint-text">
+                <Typography key={`h-${absoluteIndex}-${i}`} component="span" sx={hintTextSx}>
                   {target[i]}
-                </span>,
+                </Typography>,
               )
             }
 
             if (typed.length > target.length) {
               for (let i = target.length; i < typed.length; i++) {
                 parts.push(
-                  <span key={`x-${absoluteIndex}-${i}`} className="lyrics-input-chip">
+                  <Typography key={`x-${absoluteIndex}-${i}`} component="span" sx={inputChipSx}>
                     {typed[i]}
-                  </span>,
+                  </Typography>,
                 )
               }
             }
@@ -93,59 +128,95 @@ function LyricsPractice({
           const topText = token.isPunctuation
             ? ''
             : rookieMode
-              ? // 菜鸟模式下非当前字：显示正确拼音（灰色）
-                isCurrent
+              ? isCurrent
                 ? ''
                 : token.jyutping
-              : // 普通模式：过去显示正确拼音，当前显示输入
-                isPast
+              : isPast
                 ? token.jyutping
                 : isCurrent
                   ? input
                   : ''
+
           return (
-            <div
+            <Box
               key={`${token.character}-${absoluteIndex}`}
-              className={`lyrics-token ${isPast ? 'done' : ''} ${isCurrent ? 'current' : ''} ${token.isPunctuation ? 'punct' : ''}`}
+              sx={{
+                minWidth: token.isPunctuation ? '1em' : '2.2em',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
             >
-              <div className="lyrics-jyutping">
+              <Box sx={jyutpingRowSx}>
                 {rookieMode ? (
                   isCurrent ? (
-                    // 关键：当 input 已清空（例如按回车后切到下一字），
-                    // renderRookieJyutping() 会把拼音拆成多个 span，和“非当前 token”
-                    // 的单个 lyrics-hint-text 视觉度量不完全一致，容易造成闪动。
-                    // 所以 input 为空时直接复用非当前 token 的渲染方式。
                     isCorrect || input.length === 0 ? (
-                      <span className="lyrics-hint-text">{target}</span>
+                      <Typography component="span" sx={hintTextSx}>
+                        {target}
+                      </Typography>
                     ) : (
-                      <span className="lyrics-jyutping-plain">{renderRookieJyutping()}</span>
+                      <Box component="span" sx={jyutpingPlainSx}>
+                        {renderRookieJyutping()}
+                      </Box>
                     )
                   ) : (
-                    <span className="lyrics-hint-text">{topText}</span>
+                    <Typography component="span" sx={hintTextSx}>
+                      {topText}
+                    </Typography>
                   )
                 ) : (
-                  <span className="lyrics-hint-text">{topText}</span>
+                  <Typography component="span" sx={hintTextSx}>
+                    {topText}
+                  </Typography>
                 )}
-              </div>
-              <span className="lyrics-char">{token.character}</span>
-            </div>
+              </Box>
+              <Typography
+                component="span"
+                sx={{
+                  ...charBaseSx,
+                  color: isPast ? 'success.dark' : isCurrent ? 'grey.900' : 'grey.400',
+                }}
+              >
+                {token.character}
+              </Typography>
+            </Box>
           )
         })}
-      </article>
-      
-      {/* 分段进度指示器 */}
+      </Box>
+
       {totalSegments > 1 && (
-        <div className="lyrics-segment-progress">
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 1,
+            mt: 2,
+            py: 1.5,
+            px: 1.5,
+            bgcolor: 'grey.50',
+            borderRadius: 1,
+            width: '100%',
+          }}
+        >
           {Array.from({ length: totalSegments }).map((_, idx) => (
-            <div
+            <Box
               key={`segment-${idx}`}
-              className={`lyrics-segment-dot ${idx === currentSegment ? 'active' : ''}`}
               title={`段落 ${idx + 1}`}
+              sx={{
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                bgcolor: idx === currentSegment ? 'primary.main' : 'grey.300',
+                transform: idx === currentSegment ? 'scale(1.2)' : 'none',
+                transition: (theme) => theme.transitions.create(['background-color', 'transform']),
+                '&:hover': { bgcolor: idx === currentSegment ? 'primary.main' : 'grey.400' },
+              }}
             />
           ))}
-        </div>
+        </Box>
       )}
-    </section>
+    </Box>
   )
 }
 

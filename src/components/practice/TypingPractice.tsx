@@ -1,5 +1,13 @@
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import type { CantoneseWord } from '../../types'
-import './TypingPractice.css'
+import {
+  charBaseSx,
+  hintTextSx,
+  inputChipSx,
+  jyutpingPlainSx,
+  jyutpingRowSx,
+} from './muiPracticeStyles'
 
 interface TypingPracticeProps {
   words: CantoneseWord[]
@@ -16,7 +24,6 @@ function TypingPractice({
   rookieMode = false,
   isCorrect = false,
 }: TypingPracticeProps) {
-  // 参考模式（rookieMode）下：只渲染当前附近的一小段，避免一次性渲染过多 DOM。
   const referenceWindowSize = 50
   const startIndex = rookieMode
     ? Math.max(0, currentIndex - Math.floor(referenceWindowSize / 2))
@@ -27,57 +34,71 @@ function TypingPractice({
   const visibleWords = rookieMode ? words.slice(startIndex, endIndex) : words
 
   return (
-    <section className="typing-practice">
-      <article className="typing-line" aria-label="打字練習">
+    <Box
+      component="section"
+      sx={{
+        width: '100%',
+        maxWidth: 860,
+        minHeight: 260,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Box
+        component="article"
+        aria-label="打字練習"
+        sx={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: 'repeat(5, minmax(0, 1fr))',
+            sm: 'repeat(8, minmax(0, 1fr))',
+            md: 'repeat(10, minmax(0, 1fr))',
+          },
+          gap: '10px 6px',
+          py: 0.75,
+          px: 1.25,
+          alignItems: 'start',
+        }}
+      >
         {visibleWords.map((word, indexWithinWindow) => {
           const absoluteIndex = rookieMode ? startIndex + indexWithinWindow : indexWithinWindow
 
           const isPast = absoluteIndex < currentIndex
           const isCurrent = absoluteIndex === currentIndex
           const target = word.jyutping
-          // 在“刚刚答对”的过渡期（App 里延迟 nextWord()）input 会被清空，
-          // 如果这里直接用空 input 渲染，会造成当前字闪一下再变空。
-          // 因此在过渡期用目标拼音替代 input，保持当前字显示为“已完成状态”。
           const displayInput = isCurrent && isCorrect ? target : input
           const typed = isCurrent ? displayInput : ''
 
           const renderRookieJyutping = () => {
-            // 菜鸟模式：灰色底纹显示正确拼音；已输入前缀用小圆角 chip 覆盖
             const prefixLen = Math.min(typed.length, target.length)
             const restStart = prefixLen
 
             const parts: React.ReactNode[] = []
             for (let i = 0; i < prefixLen; i++) {
               parts.push(
-                <span
-                  key={`t-${absoluteIndex}-${i}`}
-                  className="typing-input-chip"
-                >
+                <Typography key={`t-${absoluteIndex}-${i}`} component="span" sx={inputChipSx}>
                   {typed[i]}
-                </span>,
+                </Typography>,
               )
             }
 
             for (let i = restStart; i < target.length; i++) {
               parts.push(
-                <span
-                  key={`h-${absoluteIndex}-${i}`}
-                  className="typing-hint-text"
-                >
+                <Typography key={`h-${absoluteIndex}-${i}`} component="span" sx={hintTextSx}>
                   {target[i]}
-                </span>,
+                </Typography>,
               )
             }
 
             if (typed.length > target.length) {
               for (let i = target.length; i < typed.length; i++) {
                 parts.push(
-                  <span
-                    key={`x-${absoluteIndex}-${i}`}
-                    className="typing-input-chip"
-                  >
+                  <Typography key={`x-${absoluteIndex}-${i}`} component="span" sx={inputChipSx}>
                     {typed[i]}
-                  </span>,
+                  </Typography>,
                 )
               }
             }
@@ -86,40 +107,64 @@ function TypingPractice({
           }
 
           const topText = rookieMode
-            ? // 菜鸟模式下非当前字：显示正确拼音（灰色）
-              isCurrent
+            ? isCurrent
               ? ''
               : word.jyutping
-            : // 普通模式：过去显示正确拼音，当前显示输入
-              isPast
+            : isPast
               ? word.jyutping
               : isCurrent
                 ? displayInput
                 : ''
 
           return (
-            <div
+            <Box
               key={`${word.character}-${absoluteIndex}`}
-              className={`typing-token ${isPast ? 'done' : ''} ${isCurrent ? 'current' : ''}`}
+              sx={{
+                minWidth: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
             >
-              <div className="typing-jyutping">
+              <Box sx={jyutpingRowSx}>
                 {rookieMode ? (
                   isCurrent ? (
-                    <span className="typing-jyutping-plain">{renderRookieJyutping()}</span>
+                    <Box component="span" sx={jyutpingPlainSx}>
+                      {renderRookieJyutping()}
+                    </Box>
                   ) : (
-                    <span className="typing-hint-text">{topText}</span>
+                    <Typography component="span" sx={hintTextSx}>
+                      {topText}
+                    </Typography>
                   )
                 ) : (
-                  <span className="typing-hint-text">{topText}</span>
+                  <Typography component="span" sx={hintTextSx}>
+                    {topText}
+                  </Typography>
                 )}
-              </div>
-              <span className="typing-character">{word.character}</span>
-              <div className="typing-meaning">{word.meaning}</div>
-            </div>
+              </Box>
+              <Typography
+                component="span"
+                sx={{
+                  ...charBaseSx,
+                  color: isPast ? 'success.dark' : isCurrent ? 'grey.900' : 'grey.400',
+                }}
+              >
+                {word.character}
+              </Typography>
+              <Typography
+                component="div"
+                variant="body2"
+                sx={{ mt: 0.75, fontSize: 13, color: 'text.secondary', lineHeight: 1.2 }}
+              >
+                {word.meaning}
+              </Typography>
+            </Box>
           )
         })}
-      </article>
-    </section>
+      </Box>
+    </Box>
   )
 }
 
