@@ -1,12 +1,16 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import type { SxProps, Theme } from '@mui/material/styles'
 import type { CantoneseWord } from '../../types'
+import { jyutpingInputHasError } from '../../utils/jyutpingInput'
 import {
   charBaseSx,
+  currentCharUnderlineSx,
   hintTextSx,
-  inputChipSx,
   jyutpingPlainSx,
   jyutpingRowSx,
+  pinyinTypedCorrectSx,
+  pinyinTypedWrongSx,
 } from './muiPracticeStyles'
 
 interface TypingPracticeProps {
@@ -51,16 +55,16 @@ function TypingPractice({
         aria-label="打字練習"
         sx={{
           width: '100%',
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: 'repeat(5, minmax(0, 1fr))',
-            sm: 'repeat(8, minmax(0, 1fr))',
-            md: 'repeat(10, minmax(0, 1fr))',
-          },
-          gap: '10px 6px',
-          py: 0.75,
-          px: 1.25,
-          alignItems: 'start',
+          maxWidth: 900,
+          mx: 'auto',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          columnGap: { xs: '4px', sm: '6px' },
+          rowGap: { xs: '8px', sm: '24px' },
+          py: { xs: 1, sm: 1.5 },
+          px: { xs: 1, sm: 2, md: 4 },
         }}
       >
         {visibleWords.map((word, indexWithinWindow) => {
@@ -73,36 +77,26 @@ function TypingPractice({
           const typed = isCurrent ? displayInput : ''
 
           const renderRookieJyutping = () => {
-            const prefixLen = Math.min(typed.length, target.length)
-            const restStart = prefixLen
-
             const parts: React.ReactNode[] = []
-            for (let i = 0; i < prefixLen; i++) {
+            for (let i = 0; i < typed.length; i++) {
+              const ok = i < target.length && typed[i].toLowerCase() === target[i].toLowerCase()
               parts.push(
-                <Typography key={`t-${absoluteIndex}-${i}`} component="span" sx={inputChipSx}>
+                <Typography
+                  key={`t-${absoluteIndex}-${i}`}
+                  component="span"
+                  sx={ok ? pinyinTypedCorrectSx : pinyinTypedWrongSx}
+                >
                   {typed[i]}
                 </Typography>,
               )
             }
-
-            for (let i = restStart; i < target.length; i++) {
+            for (let i = typed.length; i < target.length; i++) {
               parts.push(
                 <Typography key={`h-${absoluteIndex}-${i}`} component="span" sx={hintTextSx}>
                   {target[i]}
                 </Typography>,
               )
             }
-
-            if (typed.length > target.length) {
-              for (let i = target.length; i < typed.length; i++) {
-                parts.push(
-                  <Typography key={`x-${absoluteIndex}-${i}`} component="span" sx={inputChipSx}>
-                    {typed[i]}
-                  </Typography>,
-                )
-              }
-            }
-
             return parts
           }
 
@@ -116,11 +110,19 @@ function TypingPractice({
                 ? displayInput
                 : ''
 
+          const charColor = isPast
+            ? 'success.dark'
+            : isCurrent
+              ? jyutpingInputHasError(typed, target)
+                ? 'error.main'
+                : 'text.primary'
+              : 'grey.400'
+
           return (
             <Box
               key={`${word.character}-${absoluteIndex}`}
               sx={{
-                minWidth: 0,
+                minWidth: '2em',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -146,10 +148,13 @@ function TypingPractice({
               </Box>
               <Typography
                 component="span"
-                sx={{
-                  ...charBaseSx,
-                  color: isPast ? 'success.dark' : isCurrent ? 'grey.900' : 'grey.400',
-                }}
+                sx={
+                  [
+                    charBaseSx,
+                    isCurrent ? currentCharUnderlineSx : null,
+                    { color: charColor },
+                  ] as SxProps<Theme>
+                }
               >
                 {word.character}
               </Typography>
