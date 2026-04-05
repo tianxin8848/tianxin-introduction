@@ -17,4 +17,5 @@ export interface PolitenessPhrase {
   category: string;
 }
 
-export type Mode = 'reference' | 'advanced' | 'lyrics' | 'politeness';
+/** 韻母模塊內：參考 / 進階（非路由，僅 UI 狀態） */
+export type FinalsPracticeVariant = 'reference' | 'advanced'

@@ -1,11 +1,19 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-dom'
 import CssBaseline from '@mui/material/CssBaseline'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 import './index.css'
 import App from './App.tsx'
 import { appTheme } from './theme'
+import { moduleHref, PRACTICE_MODULES } from './registry'
+
+function LegacyFinalRedirect() {
+  const { final } = useParams<{ final: string }>()
+  return <Navigate to={`/m/finals/${final}`} replace />
+}
+
+const defaultModulePath = moduleHref(PRACTICE_MODULES[0])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,8 +22,9 @@ createRoot(document.getElementById('root')!).render(
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/final/aa" replace />} />
-            <Route path="/final/:final" element={<App />} />
+            <Route path="/" element={<Navigate to={defaultModulePath} replace />} />
+            <Route path="/final/:final" element={<LegacyFinalRedirect />} />
+            <Route path="/m/:moduleId/:segment?" element={<App />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

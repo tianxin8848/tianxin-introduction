@@ -2,28 +2,27 @@ import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import type { Mode } from '../../types'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { PRACTICE_MODULES, moduleHref, type PracticeModuleDefinition } from '../../registry'
 
-interface ModeToggleProps {
-  mode: Mode
-  switchMode: (nextMode: Mode) => void
+interface ModuleNavProps {
   sidebarCollapsed: boolean
 }
 
-const modes: { value: Mode; short: string; label: string; hint: string }[] = [
-  { value: 'reference', short: '參', label: '參考模式', hint: '參考模式' },
-  { value: 'advanced', short: '進', label: '進階模式', hint: '進階模式' },
-  { value: 'lyrics', short: '歌', label: '歌詞模式', hint: '歌詞模式' },
-  { value: 'politeness', short: '禮', label: '禮貌用語', hint: '禮貌用語' },
-]
+function activeModuleFromPath(pathname: string): PracticeModuleDefinition | undefined {
+  return PRACTICE_MODULES.find((m) => pathname.startsWith(`/m/${m.pathSegment}`))
+}
 
-function ModeToggle({ mode, switchMode, sidebarCollapsed }: ModeToggleProps) {
+function ModuleNav({ sidebarCollapsed }: ModuleNavProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
   const isNarrow = useMediaQuery('(max-width:768px)')
 
   if (isNarrow && sidebarCollapsed) {
     return null
   }
 
+  const active = activeModuleFromPath(location.pathname)
   const vertical = !isNarrow
 
   return (
@@ -35,13 +34,16 @@ function ModeToggle({ mode, switchMode, sidebarCollapsed }: ModeToggleProps) {
       }}
     >
       <Tabs
-        value={mode}
-        onChange={(_, v) => switchMode(v as Mode)}
+        value={active?.pathSegment ?? false}
+        onChange={(_, pathSegment) => {
+          const mod = PRACTICE_MODULES.find((m) => m.pathSegment === pathSegment)
+          if (mod) navigate(moduleHref(mod))
+        }}
         orientation={vertical ? 'vertical' : 'horizontal'}
         variant={vertical ? 'fullWidth' : 'scrollable'}
         scrollButtons={vertical ? false : 'auto'}
         allowScrollButtonsMobile
-        aria-label="練習模式"
+        aria-label="練習模塊"
         sx={{
           ...(vertical && {
             '& .MuiTabs-indicator': {
@@ -69,11 +71,11 @@ function ModeToggle({ mode, switchMode, sidebarCollapsed }: ModeToggleProps) {
           },
         }}
       >
-        {modes.map((m) => (
+        {PRACTICE_MODULES.map((m) => (
           <Tab
-            key={m.value}
-            value={m.value}
-            label={vertical && sidebarCollapsed ? m.short : m.label}
+            key={m.pathSegment}
+            value={m.pathSegment}
+            label={vertical && sidebarCollapsed ? m.navShort : m.title}
             title={m.hint}
           />
         ))}
@@ -82,4 +84,4 @@ function ModeToggle({ mode, switchMode, sidebarCollapsed }: ModeToggleProps) {
   )
 }
 
-export default ModeToggle
+export default ModuleNav

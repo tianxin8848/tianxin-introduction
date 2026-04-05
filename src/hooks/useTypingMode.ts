@@ -12,7 +12,7 @@ interface UseTypingModeReturn {
   reset: () => void
 }
 
-export function useTypingMode(selectedFinal: JyutpingFinal): UseTypingModeReturn {
+export function useTypingMode(selectedFinal: JyutpingFinal, enabled = true): UseTypingModeReturn {
   const [trainingWords, setTrainingWords] = useState<CantoneseWord[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
@@ -20,6 +20,13 @@ export function useTypingMode(selectedFinal: JyutpingFinal): UseTypingModeReturn
   const currentWord = trainingWords[currentIndex]
 
   useEffect(() => {
+    if (!enabled) {
+      setTrainingWords([])
+      setCurrentIndex(0)
+      setIsLoading(false)
+      return
+    }
+
     let cancelled = false
 
     const loadWords = async () => {
@@ -36,7 +43,7 @@ export function useTypingMode(selectedFinal: JyutpingFinal): UseTypingModeReturn
     return () => {
       cancelled = true
     }
-  }, [selectedFinal])
+  }, [selectedFinal, enabled])
 
   const nextWord = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % trainingWords.length)

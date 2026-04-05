@@ -81,7 +81,7 @@ function ReferenceSections() {
                   key={`${section.title}-${item}`}
                   label={item}
                   component={NavLink}
-                  to={`/final/${item}`}
+                  to={`/m/finals/${item}`}
                   clickable
                   variant="outlined"
                   size="small"

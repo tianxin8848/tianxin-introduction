@@ -1,132 +1,154 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams, useLocation } from 'react-router-dom'
 import './App.css'
-import type { Mode } from './types'
+import type { FinalsPracticeVariant } from './types'
+import type { JyutpingFinal } from './data/finals'
 import { isJyutpingFinal } from './data/finals'
 import { lyricTokens } from './data/lyricsData'
 import { politenessPhrases } from './data/politenessData'
+import { getModuleByPathSegment } from './registry'
 import { useTypingMode, useLyricsMode, usePolitenessMode, useScore, useKeyboard } from './hooks'
 
-// Components
 import Sidebar from './components/layout/Sidebar'
 import ProgressCard from './components/stats/ProgressCard'
 import TypingStats from './components/stats/TypingStats'
-import TypingPractice from './components/practice/TypingPractice'
-import LyricsPractice from './components/practice/LyricsPractice'
-import PolitenessPractice from './components/practice/PolitenessPractice'
-import LyricsSegmentControls from './components/controls/LyricsSegmentControls'
 import ReferenceSections from './components/practice/ReferenceSections'
+import FinalsModule from './modules/finals/FinalsModule'
+import LyricsModule from './modules/lyrics/LyricsModule'
+import PolitenessModule from './modules/politeness/PolitenessModule'
+import { ComparisonModule } from './modules'
 
 function App() {
-  const { final = 'aa' } = useParams()
-  const selectedFinal = useMemo(() => (isJyutpingFinal(final) ? final : 'aa'), [final])
+  const { moduleId, segment } = useParams<{ moduleId: string; segment?: string }>()
+  const location = useLocation()
+  const mod = getModuleByPathSegment(moduleId)
 
-  const [mode, setMode] = useState<Mode>('reference')
+  const [finalsVariant, setFinalsVariant] = useState<FinalsPracticeVariant>('reference')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [lyricsRookieMode, setLyricsRookieMode] = useState(true)
 
-  const isLyricsMode = mode === 'lyrics'
-  const isPolitenessMode = mode === 'politeness'
+  if (!mod) {
+    return <Navigate to="/m/finals/aa" replace />
+  }
 
-  // Initialize hooks
-  const typingMode = useTypingMode(selectedFinal)
+  if (mod.childSegment) {
+    const ok = segment && mod.childSegment.validate(segment)
+    if (!ok) {
+      return <Navigate to={`/m/${mod.pathSegment}/${mod.childSegment.default}`} replace />
+    }
+  }
+
+  const selectedFinal: JyutpingFinal = useMemo(() => {
+    if (mod.kind !== 'finals') return 'aa'
+    return segment && isJyutpingFinal(segment) ? segment : mod.childSegment!.default as JyutpingFinal
+  }, [mod, segment])
+
+  const isFinals = mod.kind === 'finals'
+  const isLyrics = mod.kind === 'lyrics'
+  const isPoliteness = mod.kind === 'politeness'
+  const isComparison = mod.kind === 'comparison'
+
+  const typingMode = useTypingMode(selectedFinal, isFinals)
   const lyricsMode = useLyricsMode({ tokens: lyricTokens })
   const politenessMode = usePolitenessMode({ phrases: politenessPhrases })
   const score = useScore()
-  
-  // Keyboard input handling
+
   const keyboard = useKeyboard({
-    isActive: true,
+    isActive: mod.captureKeys,
     onEnter: () => {
-      // Create a synthetic form event for handleSubmit
-      const mockEvent = {
-        preventDefault: () => {}
-      } as React.FormEvent
+      const mockEvent = { preventDefault: () => {} } as React.FormEvent
       handleSubmit(mockEvent)
-    }
+    },
   })
-  
-  // Sync keyboard input with score input
+
   useEffect(() => {
     score.setInput(keyboard.input)
   }, [keyboard.input, score])
 
-  // Handle mode switching
-  const switchMode = useCallback((nextMode: Mode) => {
-    setMode(nextMode)
+  useEffect(() => {
     score.reset()
-    
-    if (nextMode === 'lyrics') {
-      lyricsMode.reset()
-    } else if (nextMode === 'politeness') {
-      politenessMode.reset()
-    } else {
-      typingMode.reset()
-    }
-  }, [score, lyricsMode, politenessMode, typingMode])
+    lyricsMode.reset()
+    politenessMode.reset()
+    typingMode.reset()
+  }, [location.pathname])
 
-  // Handle submit for all modes
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (isLyricsMode) {
-      const isMatched = lyricsMode.submitInput(score.input)
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault()
+
+      if (isComparison) return
+
+      if (isLyrics) {
+        const isMatched = lyricsMode.submitInput(score.input)
+        score.incrementTotal()
+        if (isMatched) {
+          score.setCorrect(true)
+          score.incrementScore()
+          keyboard.clearInput()
+          setTimeout(() => {
+            score.setCorrect(false)
+          }, 500)
+        }
+        return
+      }
+
+      if (isPoliteness) {
+        const isMatched = politenessMode.submitInput(score.input)
+        score.incrementTotal()
+        if (isMatched) {
+          score.setCorrect(true)
+          score.incrementScore()
+          keyboard.clearInput()
+          setTimeout(() => {
+            score.setCorrect(false)
+          }, 500)
+        }
+        return
+      }
+
+      if (!typingMode.currentWord) return
+
+      const normalizedInput = score.input.trim().toLowerCase()
+      const isMatched = normalizedInput === typingMode.currentWord.jyutping.toLowerCase()
+
       score.incrementTotal()
       if (isMatched) {
         score.setCorrect(true)
         score.incrementScore()
-        keyboard.clearInput() // 立即清空输入
+        keyboard.clearInput()
         setTimeout(() => {
           score.setCorrect(false)
+          typingMode.nextWord()
         }, 500)
       }
-      return
-    }
+    },
+    [
+      isComparison,
+      isLyrics,
+      isPoliteness,
+      lyricsMode,
+      politenessMode,
+      typingMode,
+      score,
+      keyboard,
+    ],
+  )
 
-    if (isPolitenessMode) {
-      const isMatched = politenessMode.submitInput(score.input)
-      score.incrementTotal()
-      if (isMatched) {
-        score.setCorrect(true)
-        score.incrementScore()
-        keyboard.clearInput() // 立即清空输入
-        setTimeout(() => {
-          score.setCorrect(false)
-        }, 500)
-      }
-      return
-    }
-
-    // Typing mode
-    if (!typingMode.currentWord) return
-    
-    const normalizedInput = score.input.trim().toLowerCase()
-    const isMatched = normalizedInput === typingMode.currentWord.jyutping.toLowerCase()
-    
-    score.incrementTotal()
-    if (isMatched) {
-      score.setCorrect(true)
-      score.incrementScore()
-      keyboard.clearInput() // 立即清空输入
-      setTimeout(() => {
-        score.setCorrect(false)
-        typingMode.nextWord()
-      }, 500)
-    }
-  }, [isLyricsMode, isPolitenessMode, lyricsMode, politenessMode, typingMode, score, keyboard])
-
-  // Calculate progress
-  const totalWords = isLyricsMode
+  const totalWords = isLyrics
     ? lyricTokens.filter((token) => !token.isPunctuation).length
-    : isPolitenessMode
-    ? politenessPhrases.length
-    : typingMode.trainingWords.length
+    : isPoliteness
+      ? politenessPhrases.length
+      : isFinals
+        ? typingMode.trainingWords.length
+        : 0
 
-  const progressBase = isLyricsMode
+  const progressBase = isLyrics
     ? lyricTokens.slice(0, lyricsMode.lyricIndex + 1).filter((token) => !token.isPunctuation).length
-    : isPolitenessMode
-    ? politenessMode.politenessIndex + 1
-    : typingMode.currentIndex + 1
+    : isPoliteness
+      ? politenessMode.politenessIndex + 1
+      : isFinals
+        ? typingMode.currentIndex + 1
+        : 0
 
   const progressPercent = totalWords > 0 ? Math.round((progressBase / totalWords) * 100) : 0
   const currentProgress = totalWords > 0 ? progressBase : 0
@@ -136,10 +158,10 @@ function App() {
       <Sidebar
         sidebarCollapsed={sidebarCollapsed}
         setSidebarCollapsed={setSidebarCollapsed}
+        moduleKind={mod.kind}
         selectedFinal={selectedFinal}
-        isLyricsMode={isLyricsMode}
-        mode={mode}
-        switchMode={switchMode}
+        finalsVariant={finalsVariant}
+        setFinalsVariant={setFinalsVariant}
         lyricsRookieMode={lyricsRookieMode}
         setLyricsRookieMode={setLyricsRookieMode}
       />
@@ -152,30 +174,21 @@ function App() {
         />
 
         <TypingStats accuracy={score.accuracy} score={score.score} total={score.total} />
-        
-        {isLyricsMode ? (
-          <>
-            <LyricsSegmentControls
-              lyricsSegmentSize={lyricsMode.segmentSize}
-              setLyricsSegmentSize={lyricsMode.setSegmentSize}
-              lyricsCurrentSegment={lyricsMode.currentSegment}
-              setLyricsCurrentSegment={lyricsMode.setCurrentSegment}
-              lyricIndex={lyricsMode.lyricIndex}
-              lyricTokens={lyricTokens}
-            />
-            
-            <LyricsPractice
-              tokens={lyricTokens}
-              currentIndex={lyricsMode.lyricIndex}
-              input={score.input}
-              rookieMode={lyricsRookieMode}
-              isCorrect={score.isCorrect}
-              segmentSize={lyricsMode.segmentSize}
-              currentSegment={lyricsMode.currentSegment}
-            />
-          </>
-        ) : isPolitenessMode ? (
-          <PolitenessPractice
+
+        {isLyrics ? (
+          <LyricsModule
+            tokens={lyricTokens}
+            lyricIndex={lyricsMode.lyricIndex}
+            input={score.input}
+            rookieMode={lyricsRookieMode}
+            isCorrect={score.isCorrect}
+            segmentSize={lyricsMode.segmentSize}
+            currentSegment={lyricsMode.currentSegment}
+            setSegmentSize={lyricsMode.setSegmentSize}
+            setCurrentSegment={lyricsMode.setCurrentSegment}
+          />
+        ) : isPoliteness ? (
+          <PolitenessModule
             currentPhrase={politenessMode.currentPhrase}
             input={score.input}
             isCorrect={score.isCorrect}
@@ -185,15 +198,17 @@ function App() {
             }}
             onSubmit={handleSubmit}
           />
-        ) : typingMode.isLoading ? (
-          <div className="loading-state">正在加载 {selectedFinal} 韻母練習詞...</div>
+        ) : isComparison ? (
+          <ComparisonModule />
         ) : (
-          <TypingPractice
+          <FinalsModule
+            selectedFinal={selectedFinal}
+            isLoading={typingMode.isLoading}
             words={typingMode.trainingWords}
             currentIndex={typingMode.currentIndex}
             input={score.input}
-            rookieMode={mode === 'reference'}
             isCorrect={score.isCorrect}
+            variant={finalsVariant}
           />
         )}
 
@@ -201,9 +216,19 @@ function App() {
       </main>
 
       <footer className="footer">
-          <p>數據參考: <a href="https://corpus.eduhk.hk/cantonese" target="_blank" rel="noopener noreferrer">香港大学粤语研究</a></p>
-          <p>數據參考: <a href="https://jyutping.io/tutorial" target="_blank" rel="noopener noreferrer">粵拼.io</a></p>
-          <p>致谢: to those who support me</p>
+        <p>
+          數據參考:{' '}
+          <a href="https://corpus.eduhk.hk/cantonese" target="_blank" rel="noopener noreferrer">
+            香港大学粤语研究
+          </a>
+        </p>
+        <p>
+          數據參考:{' '}
+          <a href="https://jyutping.io/tutorial" target="_blank" rel="noopener noreferrer">
+            粵拼.io
+          </a>
+        </p>
+        <p>致谢: to those who support me</p>
       </footer>
     </div>
   )
