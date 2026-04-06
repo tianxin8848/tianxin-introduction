@@ -1,4 +1,8 @@
 import { isJyutpingFinal } from '../data/finals'
+import {
+  COMPARISON_DEFAULT_LIST_ID,
+  isComparisonListId,
+} from '../modules/comparison/comparisonListRegistry'
 
 /** 与界面渲染、键盘捕获等行为对应的模块类型 */
 export type PracticeModuleKind = 'finals' | 'lyrics' | 'politeness' | 'comparison'
@@ -63,6 +67,10 @@ export const PRACTICE_MODULES: PracticeModuleDefinition[] = [
     hint: '普通話拼音與粵拼差異參考',
     kind: 'comparison',
     captureKeys: false,
+    childSegment: {
+      default: COMPARISON_DEFAULT_LIST_ID,
+      validate: isComparisonListId,
+    },
   },
 ]
 

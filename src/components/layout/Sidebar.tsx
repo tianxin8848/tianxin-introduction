@@ -4,6 +4,7 @@ import AppHeader from './AppHeader'
 import ModuleNav from '../controls/ModuleNav'
 import FinalsVariantToggle from '../controls/FinalsVariantToggle'
 import LyricsModeToggle from '../controls/LyricsModeToggle'
+import ComparisonListNav from '../controls/ComparisonListNav'
 
 interface SidebarProps {
   sidebarCollapsed: boolean
@@ -56,6 +57,9 @@ function Sidebar({
           setLyricsRookieMode={setLyricsRookieMode}
           sidebarCollapsed={sidebarCollapsed}
         />
+      )}
+      {moduleKind === 'comparison' && (
+        <ComparisonListNav sidebarCollapsed={sidebarCollapsed} />
       )}
     </aside>
   )

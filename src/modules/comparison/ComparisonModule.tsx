@@ -6,9 +6,16 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-import { PINYIN_COMPARISON_ROWS } from './comparisonData'
+import type { ComparisonListId } from './comparisonListRegistry'
+import { COMPARISON_LISTS } from './comparisonListRegistry'
 
-function ComparisonModule() {
+interface ComparisonModuleProps {
+  listId: ComparisonListId
+}
+
+function ComparisonModule({ listId }: ComparisonModuleProps) {
+  const { title, description, rows } = COMPARISON_LISTS[listId]
+
   return (
     <Paper
       component="section"
@@ -17,10 +24,10 @@ function ComparisonModule() {
       aria-label="普通話拼音與粵拼對照"
     >
       <Typography variant="h6" component="h2" gutterBottom>
-        普通話拼音與粵拼差異（參考）
+        {title}
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-        以下為常見對照思路，實際讀音請以詞典與音頻為準。
+        {description}
       </Typography>
       <TableContainer>
         <Table size="small">
@@ -32,7 +39,7 @@ function ComparisonModule() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {PINYIN_COMPARISON_ROWS.map((row) => (
+            {rows.map((row) => (
               <TableRow key={row.mandarin}>
                 <TableCell>{row.mandarin}</TableCell>
                 <TableCell>{row.cantonese}</TableCell>

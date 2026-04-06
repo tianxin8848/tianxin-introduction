@@ -17,6 +17,7 @@ import FinalsModule from './modules/finals/FinalsModule'
 import LyricsModule from './modules/lyrics/LyricsModule'
 import PolitenessModule from './modules/politeness/PolitenessModule'
 import { ComparisonModule } from './modules'
+import type { ComparisonListId } from './modules/comparison/comparisonListRegistry'
 
 function App() {
   const { moduleId, segment } = useParams<{ moduleId: string; segment?: string }>()
@@ -199,7 +200,7 @@ function App() {
             onSubmit={handleSubmit}
           />
         ) : isComparison ? (
-          <ComparisonModule />
+          <ComparisonModule listId={segment as ComparisonListId} />
         ) : (
           <FinalsModule
             selectedFinal={selectedFinal}

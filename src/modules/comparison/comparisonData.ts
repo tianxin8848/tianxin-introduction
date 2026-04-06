@@ -1,14 +1,17 @@
-/** 普粵對照示例：擴展模塊時只改數據即可驅動界面 */
+/** 普粵對照：類型定義。具體列表請在 ./lists/*.ts 中各建一檔，由 comparisonListRegistry 自動掛載 */
+
 export interface PinyinComparisonRow {
   mandarin: string
   cantonese: string
   note: string
 }
 
-export const PINYIN_COMPARISON_ROWS: PinyinComparisonRow[] = [
-  { mandarin: 'zh / ch / sh', cantonese: 'z / c / s（部分字）或 j', note: '粵語無捲舌音，對應關係因字而異' },
-  { mandarin: 'j / q / x（齊齒呼）', cantonese: 'g / k / h 或 gw / kw', note: '粵語保留更多舌根塞音拼法' },
-  { mandarin: '-ong', cantonese: '-ung', note: '如 中 zung1' },
-  { mandarin: '-iao', cantonese: '-iu', note: '如 小 siu2' },
-  { mandarin: '韻尾 -n / -ng 混感', cantonese: '鼻音韻尾對立更穩定', note: '需按粵語音系區分' },
-]
+export interface ComparisonListDefinition {
+  title: string
+  description: string
+  rows: PinyinComparisonRow[]
+  /** 側欄收起時 Tab 顯示，未填則用序號 1、2、3… */
+  navShort?: string
+  /** 側欄 Tab 完整標題，未填則為「對照表（檔名）」 */
+  navLabel?: string
+}
