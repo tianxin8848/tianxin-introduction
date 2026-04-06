@@ -14,7 +14,7 @@ interface ComparisonModuleProps {
 }
 
 function ComparisonModule({ listId }: ComparisonModuleProps) {
-  const { title, description, rows } = COMPARISON_LISTS[listId]
+  const { title, description, rows, renderBody } = COMPARISON_LISTS[listId]
 
   return (
     <Paper
@@ -29,26 +29,30 @@ function ComparisonModule({ listId }: ComparisonModuleProps) {
       <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
         {description}
       </Typography>
-      <TableContainer>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>普通話拼音習慣</TableCell>
-              <TableCell>粵拼示例方向</TableCell>
-              <TableCell>說明</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.mandarin}>
-                <TableCell>{row.mandarin}</TableCell>
-                <TableCell>{row.cantonese}</TableCell>
-                <TableCell>{row.note}</TableCell>
+      {renderBody != null ? (
+        renderBody()
+      ) : (
+        <TableContainer>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>普通話拼音習慣</TableCell>
+                <TableCell>粵拼示例方向</TableCell>
+                <TableCell>說明</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {(rows ?? []).map((row) => (
+                <TableRow key={row.mandarin}>
+                  <TableCell>{row.mandarin}</TableCell>
+                  <TableCell>{row.cantonese}</TableCell>
+                  <TableCell>{row.note}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </Paper>
   )
 }

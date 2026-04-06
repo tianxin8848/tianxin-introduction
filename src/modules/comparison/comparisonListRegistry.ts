@@ -6,13 +6,13 @@ export interface ComparisonListEntry extends ComparisonListDefinition {
   id: ComparisonListId
 }
 
-const listModules = import.meta.glob<ComparisonListDefinition>('./lists/*.ts', {
+const listModules = import.meta.glob<ComparisonListDefinition>('./lists/*.{ts,tsx}', {
   eager: true,
   import: 'default',
 })
 
 function pathToId(path: string): ComparisonListId | null {
-  const m = path.match(/\.\/lists\/(.+)\.ts$/)
+  const m = path.match(/\.\/lists\/(.+)\.(ts|tsx)$/)
   return m?.[1] ?? null
 }
 
@@ -26,7 +26,7 @@ const sortedEntries: [ComparisonListId, ComparisonListDefinition][] = Object.ent
   .sort(([a], [b]) => a.localeCompare(b))
 
 if (sortedEntries.length === 0) {
-  throw new Error('comparison: 請在 src/modules/comparison/lists/ 下至少新增一個 *.ts 列表檔')
+  throw new Error('comparison: 請在 src/modules/comparison/lists/ 下至少新增一個 *.{ts,tsx} 列表檔')
 }
 
 export const COMPARISON_LIST_IDS: readonly ComparisonListId[] = sortedEntries.map(([id]) => id)
