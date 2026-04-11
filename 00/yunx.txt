@@ -1,2 +1,3 @@
+cd /Users/gohu/Documents/GitHub/Tnodejs
 git subtree split --prefix=cantonese-typing -b ct-main
 git push -u intro ct-main:main --force
