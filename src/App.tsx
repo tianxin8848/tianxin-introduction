@@ -218,6 +218,11 @@ function App() {
 
       <footer className="footer">
         <p>
+          <a href="/testlist" target="_blank" rel="noopener noreferrer">
+            测试列表
+          </a>
+        </p>
+        <p>
           數據參考:{' '}
           <a href="https://corpus.eduhk.hk/cantonese" target="_blank" rel="noopener noreferrer">
             香港大学粤语研究
