@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 import './index.css'
 import App from './App.tsx'
+import OrderTable from './modules/test/order'
 import { appTheme } from './theme'
 import { moduleHref, PRACTICE_MODULES } from './registry'
 
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
           <Routes>
             <Route path="/" element={<Navigate to={defaultModulePath} replace />} />
             <Route path="/final/:final" element={<LegacyFinalRedirect />} />
+            <Route path="/testlist" element={<OrderTable />} />
             <Route path="/m/:moduleId/:segment?" element={<App />} />
           </Routes>
         </BrowserRouter>
